@@ -7,5 +7,7 @@ Repeating the class? [ ] Yes, [x] No
 Semester, instructor, and grade of your CS151 prerequisite: 
 Fall 2017, Vidya Rangasayee, A.
 Time it took you to answer the question below:
-Did you ask anyone for help? [ ] Yes, [ ] No
+5 hours Elapsed, ~ 3.5 hours of work.
+Did you ask anyone for help? [ ] Yes, [x] No
+Clarification: Used Piazza when I was stuck on some things.
 If adding: [ ] Section 3, [ ] Section 4, [ ] Either
