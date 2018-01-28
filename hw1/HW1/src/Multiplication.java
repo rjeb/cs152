@@ -1,14 +1,16 @@
 import java.util.List;
-import java.io.*;
 
-public class Multiplication<Integer> implements Function<Integer>{
+public class Multiplication<T> implements Function<T>{
 
-	Integer returnValue;
-
+	Integer returnValue = 5;
+	
 	@Override
-	public Integer apply(List<Integer> args) {
-		returnValue = args.get(0);
-		return returnValue;
+	public T apply(List<T> args) {
+		returnValue = (Integer)args.get(0);
+		for (int i = 1; i < args.size(); i++) {
+			returnValue = returnValue * (Integer)args.get(i);
+		}
+		return (T)returnValue;
 	}
 	
 
