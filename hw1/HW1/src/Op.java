@@ -5,18 +5,23 @@ public class Op<T> implements Expr<T>{
 
 	T returnValue;
 	List listArgs;
+	Function<T> function;
+	Expr<T>[] arguments; 
+	
 	@SafeVarargs public Op(Function<T> fun, Expr<T>... args){
-		listArgs = new ArrayList<T>();
-		for (int i = 0; i < args.length; i++) {
-			//puts all of the Expr into a List and passes it through the function argument's apply method
-			System.out.println(args.length);
-			listArgs.add(args[i].value());
-			returnValue = (T)fun.apply(listArgs);
-		}
+		this.function = fun;
+		this.arguments = args;
 	}
 
 	@Override
 	public T value() {
+		listArgs = new ArrayList<T>();
+		for (int i = 0; i < arguments.length; i++) {
+			//puts all of the Expr into a List and passes it through the function argument's apply method
+			System.out.println(arguments.length);
+			listArgs.add(arguments[i].value());
+		}
+		returnValue = (T)function.apply(listArgs);
 		return returnValue;
 	}
 	

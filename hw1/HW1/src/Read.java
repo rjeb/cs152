@@ -6,8 +6,7 @@ public class Read implements Expr<Integer>{
 
 	@Override
 	public Integer value() {
-		// TODO Auto-generated method stub
-		return null;
+		return in.nextInt();
 	}
 	
 }
