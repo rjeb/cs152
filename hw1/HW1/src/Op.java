@@ -18,7 +18,6 @@ public class Op<T> implements Expr<T>{
 		listArgs = new ArrayList<T>();
 		for (int i = 0; i < arguments.length; i++) {
 			//puts all of the Expr into a List and passes it through the function argument's apply method
-			System.out.println(arguments.length);
 			listArgs.add(arguments[i].value());
 		}
 		returnValue = (T)function.apply(listArgs);
