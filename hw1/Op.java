@@ -4,7 +4,7 @@ import java.util.List;
 public class Op<T> implements Expr<T>{
 
 	T returnValue;
-	List listArgs;
+	List<T> listArgs;
 	Function<T> function;
 	Expr<T>[] arguments; 
 	
