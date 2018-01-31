@@ -1,0 +1,24 @@
+Names: Jason Thai, 010954385. Vincent Diep, 007329959
+
+Step 1:
+1. List[Int]
+2. List[Any]
+3. It doesn't work because the list has to end with a Nil value.
+4. val lst = List("San","Jose","State","University")
+5. val lst = "San"::"Jose"::"State"::"University"::Nil
+
+Step 2:
+1. def concat(a : List[String]): String = {
+	if (a.isEmpty) "" else
+	a.head + " " + concat(a.tail)
+
+ }
+2. SanJoseStateUniversity (Bugs around the e with a apostrophe)
+3. Put an if else statement between the first and last statement that checks for the case JUST BEFORE the original basecase
+
+Step 3:
+1. (1,1), (1,2), (1,3), (2,1), (2,2), (2,3), (3,1), (3,2), (3,3)
+2. Base case (when all elements of the list are Nil) then you've created pairs will all the elements of the original function
+3. 
+
+
