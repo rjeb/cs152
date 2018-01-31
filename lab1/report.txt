@@ -1,0 +1,34 @@
+Jason Thai: 010954385 & Vincent Diep: 007329959
+Step 1.
+	2. res0: Int = 42
+	3. a: Int = 42
+	4. res1: Int = 43
+	5. We get a reassignment error. We get this error because values are supposed to be immutable.
+	6. We get an error becuase we didn't initialize the value.
+	
+
+Step 2.
+	1. triple: Int => Int = <function1>
+		The value triple is initialized as a function1
+	2. We think it will assign 15 to value res2. This is indeed what we get.
+	3. res3: Int => Int = <function1>
+		It assigns the function triple to another "default"? value named res3
+	4. triple is type Function
+		Correction: triple is type Int => Int
+	5. 5 is type Int
+	
+Step 3.
+	1. It assigned a list of Integers to res4
+	2. We get a list of multiples of 3 assigned to res5. This is because map creates a new list with the results from values from the input list that have been processed by triple.
+	3. List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).map( (x:Int) => x*x*x)
+	
+Step 4.
+	1. In Java,
+		we would check every digit of the input integer to see if its is 7, in which case we would increment a counter numberOfSevens for the number of 7s. We would return numberOfSevens.
+	2. Use n % 10 to check if the last digit is 7 and recurse over the entire number. 
+	3. def sevens(n:Int) : Int = if(n==0) 0 else{
+		val last = n%10
+		val rest = n/10
+		sevens(rest) + (if (last==7) 1 else 0)
+		}
+		
