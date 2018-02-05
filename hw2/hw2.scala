@@ -3,19 +3,16 @@
 object hw2 {
   def subs(s : String) : String = {
     def subStrings(str : String) : String = {
-      if (s.length() == 1){
-        s
-      }
-      
-      else{    
-      s.head + " | " + subs(s.tail)
-      }
+      str.head + "|" + str.head + str.tail.tail + "|" + subs(str.tail)
     }
     if (s.length() == 0){
-      ""
+     "" + "|"
+    }
+    if (s.length() == 1){
+      s
     }
     else{
-      subStrings(s)  
+      s + "|" + subStrings(s)  
     }
   }
   
