@@ -2,7 +2,22 @@ Jason Thai 010954385
 CS 152
 Homework 2
 
-1.
+1. There is a bijection between number lists (000, 001, 010, ...) and
+substrings of strings of length 3. This is because we treat 0's as
+cases where the character is not used in a substring and 1's as cases
+where the character is used in a substring.
+
+For this problem I generated a list (000, 001, 010, 011, etc) using
+the onebits function up to the number of digits string 's' has. For
+example, string "party" would have numbers between 00000 to 11111.
+Then these number lists are converted to a list of their indecies
+(0101 -> List(2, 4)) through onebits. After this, I have a list of
+list[int] that contains all possible "choices" you could have for
+selecting characters from the original string. Then I recursively
+call printAll() which generates a substring using the head of the
+list of indecies and recurses until the list of indecies is empty.
+All of these strings are seperated by the character "|". After this,
+you will have a string with all substrings generated. 
 
 2. For this problem we do the largest case we can and reduce the size
 until we find a length that works. We have two strings str1("probase") and str2("case"). In this case str2 is the smaller one.
