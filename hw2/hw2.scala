@@ -22,12 +22,21 @@ object hw2 {
       
     }
     
-    def printSubString(lst1 :List[List[Int]], str : String) : String = {
+    def printSubString(lst1 :List[Int], str : String) : String = {
       if (lst1.length == 0){
         ""
       }
       else{
-        str.charAt(lst1.head.head)
+        str.charAt(lst1.head).toString() + (printSubString(lst1.tail, str))
+      }
+    }
+    
+    def printAll(lst1:List[List[Int]], str:String) : String = {
+      if (lst1.length == 0){
+        ""
+      }
+      else{
+        printSubString(lst1.head, str) + "|" + printAll(lst1.tail, str)
       }
     }
     
@@ -35,7 +44,7 @@ object hw2 {
     val indeciesList = binaryList(List(), permLength)
     
     
-    printSubString(indeciesList);
+    printAll(indeciesList, s);
     
     //divide the problem into 3 cases: No head, with head, and emptySet case
     
