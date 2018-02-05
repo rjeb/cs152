@@ -7,4 +7,16 @@ Homework 2
 2.
 
 3.
-To convert a number into a list of positions we have a couple of steps. Firstly, we convert it to binary. To do this we % 2 and if the remainder is 1, we append a 1 to the list for the binary representation. If the remainder is 0, we append 0 to the list. Continue to the point where /2 yeilds a 0(end case). After this we have a list that holds the binary representation of the number. For example, 13 would yeild a list of (1101). I used the reversed function taught in class to get the list in an order that is easier to work with. Once we have the binary representation we run it through a convertIndeceies function which simply checks if the head contains a '1' value. If it does, append the index to a list that holds the indecies. We continue this until the binary representation list is empty. 
+To convert a number into a list of positions we have a couple of
+steps. Firstly, we convert it to binary. To do this we % 2 and if the
+remainder is 1, we append a 1 to the list for the binary
+representation. If the remainder is 0, we append 0 to the list.
+Continue to the point where /2 yeilds a 0(end case). After this we
+have a list that holds the binary representation of the number. For
+example, 13 would yeild a list of (1101). I used the reversed
+function taught in class to get the list in an order that is easier
+to work with. Once we have the binary representation we run it
+through a convertIndeceies function which simply checks if the head
+contains a '1' value. If it does, append the index to a list that
+holds the indecies. We continue this until the binary representation
+list is empty. 
