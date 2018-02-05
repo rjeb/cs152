@@ -65,7 +65,7 @@ object hw2 {
         ""
       }
       else if (str1.contains(str2.substring(index1, index2-1))){
-        str2
+        str2.substring(index1, index2-1)
       }
       else{
         if (commonChecker(str1, str2, index1, index2-2)){
