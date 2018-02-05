@@ -48,6 +48,7 @@ object hw2 {
   }
   
   def onebits(n: Int) : List[Int] = {
+    //converts an int argument 'x' into its Binary form returned as a list
     def convertBinary(x : Int, list1 : List[Int]) : List[Int] = {
       if (x%2 != 0){
         val list2 = 1 :: list1
@@ -69,7 +70,40 @@ object hw2 {
         }
       }
     }
-    val returnList = List();
-    convertBinary(n, returnList)
+    //reverse functions were used from lecture 3 slides
+    def append(a: List[Int], b: List[Int]): List[Int] = {
+        if (a.isEmpty) b else
+        a.head :: append(a.tail, b)
+    }
+    def reverse(a: List[Int]): List[Int] = {
+      if (a.isEmpty) a else
+      append(reverse(a.tail), List(a.head))
+    }
+    
+    def convertIndecies(list1 : List[Int], list2 : List[Int], index : Int) : List[Int] = {
+      if (list2.tail == Nil){
+        if (list2.head == 1){
+          val list3 = index :: list1;
+          list3;
+        }
+        else{
+          list1
+        }
+      }
+      else{
+        if (list2.head == 1){
+          val list3 = index :: list1;
+          convertIndecies(list3, list2.tail, index+1)
+        }
+        else{
+          convertIndecies(list1, list2.tail, index+1)
+        }
+      }
+      
+    }
+    val emptyList = List();
+    val binaryForm = convertBinary(n, emptyList)
+    val indecies = reverse(convertIndecies(emptyList, reverse(binaryForm), 0))
+    indecies
   }
 }
