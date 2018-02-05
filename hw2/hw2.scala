@@ -26,12 +26,13 @@ object hw2 {
         ""
      }
     }
+    
     //divide the problem into 3 cases: No head, with head, and emptySet case
     subStringHelper2(s) + subStringHelper(s.head, s.tail) + "|";
   }
   
   def lcs(a : String, b : String) : String = {
-    def commonChecker(str1 : String, str2 : String) : String = {
+    def commonChecker3(str1 : String, str2 : String) : String = {
       if (str2.isEmpty()){
         ""
       }
@@ -39,14 +40,65 @@ object hw2 {
         str2
       }
       else{
-        commonChecker(str1, str2.tail)
+        commonChecker3(str1, str2.tail)
       }
     }
+    
+    def commonChecker(str1 : String, str2 : String, index1 : Int, index2 : Int) : Boolean = {
+      if (str2.isEmpty()){
+        true
+      }
+      else if (str1.contains(str2.substring(index1, index1 + index2 -1))){
+        true
+      }
+      else{
+        if (index1+1 + index2 <= str2.length()){
+        commonChecker(str1, str2, index1+1, index2)
+        }
+        else{
+          false
+        }
+      }
+    }
+    def commonChecker2(str1 : String, str2 : String, index1 : Int, index2: Int) : String = {
+      if (str2.isEmpty()){
+        ""
+      }
+      else if (str1.contains(str2.substring(index1, index2-1))){
+        str2
+      }
+      else{
+        if (commonChecker(str1, str2, index1, index2-2)){
+          commonCheckerVerify(str1, str2, index1, index2-2)
+        }
+        else{
+          commonChecker2(str1, str2, index1, index2-1)
+        }
+      }
+    }
+    
+    def commonCheckerVerify(str1 : String, str2 : String, index1 : Int, index2 : Int) : String = {
+      if (str2.isEmpty()){
+        ""
+      }
+      else if (str1.contains(str2.substring(index1, index1 + index2 -1))){
+        str2.substring(index1, index1 + index2 - 1)
+      }
+      else{
+        if (index1+1 + index2 <= str2.length()){
+        commonCheckerVerify(str1, str2, index1+1, index2)
+        }
+        else{
+          ""
+        }
+      }
+    }
+    
     if (a.length() >= b.length()){
-      commonChecker(a, b)
+      commonChecker2(a, b, 0, b.length())
     }
     else{
-      commonChecker(b, a)
+      commonChecker2(b, a, 0, a.length())
     }
   }
   
