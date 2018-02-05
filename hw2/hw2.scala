@@ -48,6 +48,28 @@ object hw2 {
   }
   
   def onebits(n: Int) : List[Int] = {
-    List(1, 2);
+    def convertBinary(x : Int, list1 : List[Int]) : List[Int] = {
+      if (x%2 != 0){
+        val list2 = 1 :: list1
+        if (x/2 == 0){
+          println("length" + list1.length)
+          list2
+        }
+        else{
+          convertBinary(x/2, list2)
+        }
+      }
+      else{
+        val list2 = 0 :: list1
+        if (x/2 == 0){
+          list2
+        }
+        else{
+          convertBinary(x/2, list2)
+        }
+      }
+    }
+    val returnList = List();
+    convertBinary(n, returnList)
   }
 }
