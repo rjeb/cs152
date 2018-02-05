@@ -1,34 +1,26 @@
 
 
 object hw2 {
-  def subs(s : String) : String = {
-    def subStringHelper(char1 : Char, str : String) : String = {
-      if (str.length() > 1){
-      char1 + str + "|" + subStringHelper(char1, str.tail) + "|" + subStringHelper(char1, str.head.toString())
-      }
-      else if (str.length() == 1){
-        char1 + str
+  def subs(s : String) : List[String] = {
+    def subStringHelper(str:String, index1:Int, lst1: List[String]) : List[String]={
+      if (index1 == str.length()){
+        val lst2 = ""::lst1
+        lst2
       }
       else{
-        ""
+        val lst2 = insertSubStrings(lst1, 0, index1, str)
+        subStringHelper(str, index1 + 1, lst2)
       }
-      
     }
     
-    def subStringHelper2(str1 : String) : String = {
-     if (str1.length() > 1){
-       str1.head + "|" + subStringHelper(str1.tail.head, str1.tail.tail) + "|" + subStringHelper2(str1.tail)
-      } 
-     else if (str1.length() == 1){
-       str1.head.toString()
-     }
-     else{
-        ""
-     }
+    def insertSubStrings(lst1:List[String], index0:Int, index1:Int, str: String) : List[String] = {
+      val lst2 = str.substring(0, str.length()-index1)::lst1;
+      lst2
     }
     
     //divide the problem into 3 cases: No head, with head, and emptySet case
-    subStringHelper2(s) + subStringHelper(s.head, s.tail) + "|";
+    subStringHelper(s, 0, List());
+    
   }
   
   def lcs(a : String, b : String) : String = {
