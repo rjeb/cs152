@@ -28,7 +28,23 @@ object hw2 {
   }
   
   def lcs(a : String, b : String) : String = {
-    "Hello";
+    def commonChecker(str1 : String, str2 : String) : String = {
+      if (str2.isEmpty()){
+        ""
+      }
+      else if (str1.contains(str2)){
+        str2
+      }
+      else{
+        commonChecker(str1, str2.tail)
+      }
+    }
+    if (a.length() >= b.length()){
+      commonChecker(a, b)
+    }
+    else{
+      commonChecker(b, a)
+    }
   }
   
   def onebits(n: Int) : List[Int] = {
