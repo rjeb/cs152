@@ -17,7 +17,7 @@ object hw2 {
     
     def subStringHelper2(str1 : String) : String = {
      if (str1.length() > 1){
-       str1.head + "|" + str1.tail + "|" + subStringHelper2(str1.tail)
+       str1.head + "|" + subStringHelper(str1.tail.head, str1.tail.tail) + "|" + subStringHelper2(str1.tail)
       } 
      else{
         ""
