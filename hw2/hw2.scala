@@ -19,6 +19,9 @@ object hw2 {
      if (str1.length() > 1){
        str1.head + "|" + subStringHelper(str1.tail.head, str1.tail.tail) + "|" + subStringHelper2(str1.tail)
       } 
+     else if (str1.length() == 1){
+       str1.head.toString()
+     }
      else{
         ""
      }
@@ -53,7 +56,6 @@ object hw2 {
       if (x%2 != 0){
         val list2 = 1 :: list1
         if (x/2 == 0){
-          println("length" + list1.length)
           list2
         }
         else{
