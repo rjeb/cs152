@@ -3,19 +3,18 @@
 object hw2 {
   def subs(s : String) : List[String] = {
     def subStringHelper(str:String, index1:Int, lst1: List[String]) : List[String]={
-      if (index1 == str.length()){
+      if (index1 == 0){
         val lst2 = ""::lst1
+        subStringHelper(str, index1+1, lst2)
+      }
+      else if(index1 >= str.length()-1){
+        val lst2 = str::lst1
         lst2
       }
       else{
-        val lst2 = insertSubStrings(lst1, 0, index1, str)
-        subStringHelper(str, index1 + 1, lst2)
+        val lst2 = str.head.toString() :: lst1
+        lst2
       }
-    }
-    
-    def insertSubStrings(lst1:List[String], index0:Int, index1:Int, str: String) : List[String] = {
-      val lst2 = str.substring(0, str.length()-index1)::lst1;
-      lst2
     }
     
     //divide the problem into 3 cases: No head, with head, and emptySet case
@@ -24,17 +23,6 @@ object hw2 {
   }
   
   def lcs(a : String, b : String) : String = {
-    def commonChecker3(str1 : String, str2 : String) : String = {
-      if (str2.isEmpty()){
-        ""
-      }
-      else if (str1.contains(str2)){
-        str2
-      }
-      else{
-        commonChecker3(str1, str2.tail)
-      }
-    }
     
     def commonChecker(str1 : String, str2 : String, index1 : Int, index2 : Int) : Boolean = {
       if (str2.isEmpty()){
