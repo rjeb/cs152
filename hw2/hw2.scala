@@ -23,7 +23,8 @@ object hw2 {
         ""
      }
     }
-    subStringHelper2(s) + subStringHelper(s.head, s.tail);
+    //divide the problem into 3 cases: No head, with head, and emptySet case
+    subStringHelper2(s) + subStringHelper(s.head, s.tail) + "|";
   }
   
   def lcs(a : String, b : String) : String = {
