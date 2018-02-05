@@ -1,24 +1,43 @@
 
 
 object hw2 {
-  def subs(s : String) : List[String] = {
-    def subStringHelper(str:String, index1:Int, lst1: List[String]) : List[String]={
-      if (index1 == 0){
-        val lst2 = ""::lst1
-        subStringHelper(str, index1+1, lst2)
-      }
-      else if(index1 >= str.length()-1){
-        val lst2 = str::lst1
-        lst2
+  def subs(s : String) : String = {
+    def twoTimes(int1:Int, int2:Int, index: Int) : Int = {
+      if (index != int2){
+        val x = int1 * 2
+        twoTimes(x, int2 , index+1)
       }
       else{
-        val lst2 = str.head.toString() :: lst1
-        lst2
+        int1
+      }
+    }
+    def binaryList(lst1 : List[List[Int]], int1 : Int) : List[List[Int]] = {
+      if (int1 != 0){
+        val lst2 = onebits(int1) :: lst1
+        binaryList(lst2, int1 -1)
+      }
+      else{
+        lst1
+      }
+      
+    }
+    
+    def printSubString(lst1 :List[List[Int]], str : String) : String = {
+      if (lst1.length == 0){
+        ""
+      }
+      else{
+        str.charAt(lst1.head.head)
       }
     }
     
+    val permLength = twoTimes(1, s.length(), 0) - 1
+    val indeciesList = binaryList(List(), permLength)
+    
+    
+    printSubString(indeciesList);
+    
     //divide the problem into 3 cases: No head, with head, and emptySet case
-    subStringHelper(s, 0, List());
     
   }
   
