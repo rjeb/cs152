@@ -4,7 +4,14 @@ Homework 2
 
 1.
 
-2.
+2. For this problem we do the largest case we can and reduce the size
+until we find a length that works. We have two strings str1("probase") and str2("case"). In this case str2 is the smaller one.
+We start with all substrings of case of size 4(The length of str2)
+and see if str1 contains any of those substrings. In this case, str1
+doesn't contain "case" so we call the common checker again with the
+integer (length) we check reduced by one. In this iteration, it
+checks for whether str1 contains "cas", or "ase". Str1 contains case
+so the function ends there and returns "ase" as the common substring.
 
 3.
 To convert a number into a list of positions we have a couple of
