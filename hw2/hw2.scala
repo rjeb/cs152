@@ -79,8 +79,8 @@ object hw2 {
       if (str2.isEmpty()){
         ""
       }
-      else if (str1.contains(str2.substring(index1, index2-1))){
-        str2.substring(index1, index2-1)
+      else if (str1.contains(str2.substring(index1, index2))){
+        str2.substring(index1, index2)
       }
       else{
         if (commonChecker(str1, str2, index1, index2-2)){
