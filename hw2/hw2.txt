@@ -3,7 +3,7 @@ CS 152
 Homework 2
 
 1. There is a bijection between number lists (000, 001, 010, ...) and
-substrings of strings of length 3. This is because we treat 0's as
+subsetStrings of strings of length 3. This is because we treat 0's as
 cases where the character is not used in a substring and 1's as cases
 where the character is used in a substring.
 

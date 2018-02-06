@@ -2,6 +2,7 @@
 
 object hw2 {
   def subs(s : String) : String = {
+    //function that returns 2 ^ arg
     def twoTimes(int1:Int, int2:Int, index: Int) : Int = {
       if (index != int2){
         val x = int1 * 2
@@ -11,6 +12,7 @@ object hw2 {
         int1
       }
     }
+    //function that returns a list of all binary representation of numbers <= than arg
     def binaryList(lst1 : List[List[Int]], int1 : Int) : List[List[Int]] = {
       if (int1 != 0){
         val lst2 = onebits(int1) :: lst1
@@ -22,6 +24,7 @@ object hw2 {
       
     }
     
+    //given a List of indecies and a string, returns corresponding subString
     def printSubString(lst1 :List[Int], str : String) : String = {
       if (lst1.length == 0){
         ""
@@ -31,6 +34,7 @@ object hw2 {
       }
     }
     
+    //prints SubString using a list of list of indecies until there are no more lists of indecies
     def printAll(lst1:List[List[Int]], str:String) : String = {
       if (lst1.length == 0){
         ""
@@ -52,6 +56,7 @@ object hw2 {
   
   def lcs(a : String, b : String) : String = {
     
+    //returns whether any substring of str2 of size index2 is in str1 as a Boolean
     def commonChecker(str1 : String, str2 : String, index1 : Int, index2 : Int) : Boolean = {
       if (str2.isEmpty()){
         true
@@ -68,6 +73,8 @@ object hw2 {
         }
       }
     }
+    
+    //checks if largest case substring is shared. If not, check lower length substring recursively
     def commonChecker2(str1 : String, str2 : String, index1 : Int, index2: Int) : String = {
       if (str2.isEmpty()){
         ""
@@ -84,7 +91,7 @@ object hw2 {
         }
       }
     }
-    
+    //returns whether any substring of str2 of size index2 is in str1
     def commonCheckerVerify(str1 : String, str2 : String, index1 : Int, index2 : Int) : String = {
       if (str2.isEmpty()){
         ""
@@ -142,6 +149,7 @@ object hw2 {
       append(reverse(a.tail), List(a.head))
     }
     
+    //turns binary representation to indecy representation
     def convertIndecies(list1 : List[Int], list2 : List[Int], index : Int) : List[Int] = {
       if (list2.tail == Nil){
         if (list2.head == 1){
