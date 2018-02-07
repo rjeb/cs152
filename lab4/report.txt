@@ -1,0 +1,11 @@
+Lab 4 CS152
+Names: Jason Thai, Vincent Diem
+
+Step 1: 
+1. lst.filter(_.length < 5)
+2. lst.sortWith(_.length>_.length)  
+3. lst.reduceLeft((x,y) => if (x.length > y.length) x else y)
+
+Step 2:
+
+
