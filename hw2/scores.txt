@@ -1,0 +1,51 @@
+[0m[[0m[0minfo[0m] [0m[0mLoading settings from plugins.sbt ...[0m
+[0m[[0m[0minfo[0m] [0m[0mLoading project definition from /home/pratik/Desktop/Horstmann/assignment2/PROFESSOR/hw2/project[0m
+[0m[[0m[0minfo[0m] [0m[0mLoading settings from build.sbt ...[0m
+[0m[[0m[0minfo[0m] [0m[0mSet current project to hw2 (in build file:/home/pratik/Desktop/Horstmann/assignment2/PROFESSOR/hw2/)[0m
+[0m[[0m[0minfo[0m] [0m[0mCompiling 1 Scala source to /home/pratik/Desktop/Horstmann/assignment2/PROFESSOR/hw2/target/scala-2.12/classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mDone compiling.[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mLcsSuite:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- lcs of permission and cruise missile[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- Mary had a little lamb...[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- How much wood...[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- How much wood... should not take too long[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- Nothing in common[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mOnebitsSuite:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- Zero has no bits[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- 1023 has 10 bits[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- 1010101010101010101010 has 11 bits[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- -1 has 32 bits *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  List(0) did not equal List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31) (OnebitsSuite.scala:14)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- -2 has 31 bits *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  List(1) did not equal List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31) (OnebitsSuite.scala:17)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAnySuite:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- Subs of Amy[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- Subs of Mary[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- Subs of Bill[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- Subs of 0123456789[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- Twelve letter string has 4096 subs[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 694 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 15[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 3, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 13, failed 2, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m*** 2 TESTS FAILED ***[0m[0m
+[0m[[0m[31merror[0m] [0m[0mFailed tests:[0m
+[0m[[0m[31merror[0m] [0m[0m	OnebitsSuite[0m
+[0m[[0m[31merror[0m] [0m[0m(test:[31mtest[0m) sbt.TestsFailedException: Tests unsuccessful[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 4 s, completed Feb 8, 2018 11:29:55 PM[0m
+ 
+hw2test.scala file exists
+hw2.txt file exists
+ 
+RUBRIC 
+no var, no arrays, no Java collections, no mutable Scala collections. 
+no use of any library function other than String.length, String.contains, 
+String.substring, String.replace, one call to List.map in onebits
+
+SubsSuite (1 point per passing test case, max. 5, 0 if forbidden constructs): 
+LcsSuite (1 point per passing test case, max. 5, 0 if forbidden constructs):
+OnebitsSuite (1 point per passing test case, max. 5, 0 if forbidden constructs):
+hw2.txt (1 point per problem, max. 3): 
+hw2test.scala contains test cases for all problems (max. 1): 
+
+Total Points : 17
