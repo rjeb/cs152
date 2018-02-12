@@ -41,11 +41,11 @@ class SetSuite extends FunSuite {
   test("computing sqrt(2)") {
     assert(hw3.iterateUntil(2, x => (x + 2 / x) / 2, (x, y) => math.abs(x - y) < 1E-8) == List(2.0, 1.5, 1.4166666666666665, 1.4142156862745097, 1.4142135623746899))
   }
-  /*
+  
   test("Reducing sum with default 0") {
     assert(hw3.reduceWithDefault(0, (1 to 100).toList, _ + _) == 5050)
   }
-  
+  /*
   test("Reducing difference with default -1") {
     assert(hw3.otherReduceWithDefault(-1, (1 to 5).toList, _ - _) == 4)
   }
