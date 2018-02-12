@@ -25,11 +25,11 @@ class SetSuite extends FunSuite {
   test("First list longer") {
     assert(hw3.zip(List(1, 2, 3, 4), List(4, 5, 6), _ + _) == List(5, 7, 9, 4))
   }
-  /*
+  
   test("Multiplying neighbors, odd length") {
     assert(hw3.combineNeighbors(List(1, 2, 3, 4, 5), _ * _) == List(2, 12, 5))
   }
-  
+  /*
   test("Iterating * 2 five times") {
     assert(hw3.iterateN(1, _ * 2, 5) == List(1, 2, 4, 8, 16))
   }

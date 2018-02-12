@@ -35,6 +35,19 @@ object hw3 {
     zipHelper(list1, list2, op)
   }
   
+  def combineNeighbors(list1:List[Int], op: (Int, Int) => Int) : List[Int] = {
+    if (list1.isEmpty){
+      Nil
+    }
+    else if(list1.tail.isEmpty){
+      list1.head::combineNeighbors(list1.tail, op)
+    }
+    else{
+      op(list1.head, list1.tail.head)::combineNeighbors(list1.tail.tail, op)
+    }
+  }
+  
+  
   //list reverse functions from lecture 3 slide 7
   def append(a: List[Int], b: List[Int]): List[Int] = if (a.isEmpty) b else
     a.head :: append(a.tail, b)
