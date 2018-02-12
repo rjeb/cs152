@@ -76,6 +76,22 @@ object hw3 {
     }
   }
   
+  def iterateUntil(x:Double, f:Double=>Double, p:(Double, Double)=>Boolean) : List[Double] = {
+    def iterateUntilHelper(x:Double, f:Double=>Double, p:(Double, Double)=>Boolean) : List[Double] = {
+      if (p(x, f(x))){
+        Nil
+      }
+      else{
+        f(x)::iterateUntilHelper(f(x), f, p)
+      }
+    }
+    if (p(x, f(x))){
+      Nil
+    }
+    else{
+      x::iterateUntilHelper(x, f, p)
+    }
+  }
   
   //list reverse functions from lecture 3 slide 7
   def append(a: List[Int], b: List[Int]): List[Int] = if (a.isEmpty) b else
