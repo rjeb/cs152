@@ -49,13 +49,13 @@ class SetSuite extends FunSuite {
   test("Reducing difference with default -1") {
     assert(hw3.otherReduceWithDefault(-1, (1 to 5).toList, _ - _) == 4)
   }
-  /*
+  
   test("Small and odd") {
     assert(hw3.both(x => x < 10, x => x % 2 == 1)(3))
     assert(!hw3.both(x => x < 10, x => x % 2 == 1)(4))
     assert(!hw3.both(x => x < 10, x => x % 2 == 1)(11))
   }
-  
+  /*
   test("Small, odd, or really large") {
     assert(!hw3.any(List(x => x < 10, x => x % 2 == 1, x => x > 1000000))(300))
   }

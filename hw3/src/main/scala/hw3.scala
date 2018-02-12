@@ -120,6 +120,18 @@ object hw3 {
     otherReduceWithDefaultHelper(default, reverse(list1), flip(op))
   }
   
+  def both(op1: Int => Boolean, op2: Int=>Boolean) : Int => Boolean = {
+    def op3(arg1: Int) : Boolean = {
+      if (op1(arg1)&&op2(arg1)){
+        true
+      }
+      else{
+        false
+      }
+    }
+    op3
+  }
+  
   //list reverse functions from lecture 3 slide 7
   def append(a: List[Int], b: List[Int]): List[Int] = if (a.isEmpty) b else
     a.head :: append(a.tail, b)
