@@ -61,18 +61,18 @@ object hw3 {
   
   def iterateWhile(x:Int, f: Int=>Int, p:Int=>Boolean) : List[Int] = {
     def iterateWhileHelper(x:Int, f: Int=>Int, p:Int=>Boolean) : List[Int] = {
-      if (p(x) == false){
+      if (p(f(x)) == false){
         Nil
       }
       else{
         f(x)::iterateWhileHelper(f(x), f, p)
       }
     }
-    if (p(x) == false){
+    if (p(f(x)) == false){
       Nil
     }
     else{
-      f(x)::iterateWhile(x, f, p)
+      x::iterateWhileHelper(x, f, p)
     }
   }
   

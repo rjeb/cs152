@@ -33,11 +33,11 @@ class SetSuite extends FunSuite {
   test("Iterating * 2 five times") {
     assert(hw3.iterateN(1, _ * 2, 5) == List(1, 2, 4, 8, 16))
   }
-  /*
+  
   test("Iterating + 1 while less than 10") {
     assert(hw3.iterateWhile(0, _ + 1, _ < 10) == List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9))
   }
-  
+  /*
   test("computing sqrt(2)") {
     assert(hw3.iterateUntil(2, x => (x + 2 / x) / 2, (x, y) => math.abs(x - y) < 1E-8) == List(2.0, 1.5, 1.4166666666666665, 1.4142156862745097, 1.4142135623746899))
   }
