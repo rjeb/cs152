@@ -59,6 +59,23 @@ object hw3 {
     x::iterateHelper(x, f, n-1)
   }
   
+  def iterateWhile(x:Int, f: Int=>Int, p:Int=>Boolean) : List[Int] = {
+    def iterateWhileHelper(x:Int, f: Int=>Int, p:Int=>Boolean) : List[Int] = {
+      if (p(x) == false){
+        Nil
+      }
+      else{
+        f(x)::iterateWhileHelper(f(x), f, p)
+      }
+    }
+    if (p(x) == false){
+      Nil
+    }
+    else{
+      f(x)::iterateWhile(x, f, p)
+    }
+  }
+  
   
   //list reverse functions from lecture 3 slide 7
   def append(a: List[Int], b: List[Int]): List[Int] = if (a.isEmpty) b else
