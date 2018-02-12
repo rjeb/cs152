@@ -45,11 +45,11 @@ class SetSuite extends FunSuite {
   test("Reducing sum with default 0") {
     assert(hw3.reduceWithDefault(0, (1 to 100).toList, _ + _) == 5050)
   }
-  /*
+  
   test("Reducing difference with default -1") {
     assert(hw3.otherReduceWithDefault(-1, (1 to 5).toList, _ - _) == 4)
   }
-  
+  /*
   test("Small and odd") {
     assert(hw3.both(x => x < 10, x => x % 2 == 1)(3))
     assert(!hw3.both(x => x < 10, x => x % 2 == 1)(4))

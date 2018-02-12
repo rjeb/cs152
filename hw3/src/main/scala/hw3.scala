@@ -108,6 +108,18 @@ object hw3 {
     }
   }
   
+  def otherReduceWithDefault(default:Int, list1:List[Int], op:(Int, Int) => Int) : Int = {
+    def otherReduceWithDefaultHelper(default:Int, list1:List[Int], op:(Int, Int) => Int) : Int = {
+      if(list1.isEmpty){
+        default
+      }
+      else{
+        otherReduceWithDefaultHelper(op(default, list1.head), list1.tail, op)
+      }
+    }
+    otherReduceWithDefaultHelper(default, reverse(list1), flip(op))
+  }
+  
   //list reverse functions from lecture 3 slide 7
   def append(a: List[Int], b: List[Int]): List[Int] = if (a.isEmpty) b else
     a.head :: append(a.tail, b)
