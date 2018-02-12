@@ -55,11 +55,11 @@ class SetSuite extends FunSuite {
     assert(!hw3.both(x => x < 10, x => x % 2 == 1)(4))
     assert(!hw3.both(x => x < 10, x => x % 2 == 1)(11))
   }
-  /*
+  
   test("Small, odd, or really large") {
     assert(!hw3.any(List(x => x < 10, x => x % 2 == 1, x => x > 1000000))(300))
   }
   
-  */
+  
   
 }

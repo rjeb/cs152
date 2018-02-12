@@ -132,6 +132,21 @@ object hw3 {
     op3
   }
   
+  def any(list1: List[Int => Boolean]): Int => Boolean = {
+    def anyHelper(arg1 : Int, list2: List[Int => Boolean]) : Boolean = {
+      if (list2.isEmpty){
+        false
+      }
+      else if (list2.head(arg1) == true){
+        true
+      }
+      else{
+        anyHelper(arg1, list2.tail)
+      }
+    }
+    anyHelper(_, list1)
+  }
+  
   //list reverse functions from lecture 3 slide 7
   def append(a: List[Int], b: List[Int]): List[Int] = if (a.isEmpty) b else
     a.head :: append(a.tail, b)
