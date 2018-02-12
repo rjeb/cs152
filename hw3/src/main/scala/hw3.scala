@@ -47,6 +47,18 @@ object hw3 {
     }
   }
   
+  def iterateN(x: Int, f: Int=>Int, n:Int):List[Int] = {
+    def iterateHelper(x: Int, f: Int=>Int, n:Int):List[Int] = {
+      if(n == 0){
+        Nil
+      }
+      else{
+        f(x)::iterateHelper(f(x), f, n-1)
+      }
+    }
+    x::iterateHelper(x, f, n-1)
+  }
+  
   
   //list reverse functions from lecture 3 slide 7
   def append(a: List[Int], b: List[Int]): List[Int] = if (a.isEmpty) b else
