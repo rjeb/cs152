@@ -9,4 +9,12 @@ object hw3 {
     op3
   }
   
+  def flip(op1: (Int,Int) => Int) : (Int,Int) => Int = {
+    def op2 (a: Int, b:Int) : Int = {
+      op1(b,a)
+    }
+    op2
+  }
+  
+  
 }
