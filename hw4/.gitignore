@@ -5,3 +5,4 @@
 **/target/*/resolution-cache/**
 **/project/project/**
 **/project/target/**
+/bin/
