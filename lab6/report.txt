@@ -14,3 +14,13 @@ Step 3.
 	}
 
 
+Step4.
+
+def tokens(input : String, patterns : List[Regex]) : String = {
+
+	if (input.length == 0) Nil else {
+		val m = firstmatch(input, patterns)
+		if (m == null) Nil else :: tokens(input.substring(m.length), patterns)	
+	}
+
+}
