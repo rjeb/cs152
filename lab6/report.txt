@@ -16,11 +16,11 @@ Step 3.
 
 Step4.
 
-def tokens(input : String, patterns : List[Regex]) : String = {
+  def tokens(input : String, patterns : List[Regex]) : List[String] = {
 
 	if (input.length == 0) Nil else {
-		val m = firstmatch(input, patterns)
+		val m = firstMatch(input, patterns)
 		if (m == null) Nil else :: tokens(input.substring(m.length), patterns)	
 	}
 
-}
+  }
