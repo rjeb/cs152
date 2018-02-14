@@ -20,7 +20,7 @@ Step4.
 
 	if (input.length == 0) Nil else {
 		val m = firstMatch(input, patterns)
-		if (m == null) Nil else :: tokens(input.substring(m.length), patterns)	
+		if (m == null) Nil else m :: tokens(input.substring(m.length), patterns)	
 	}
 
   }
