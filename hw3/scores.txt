@@ -1,0 +1,59 @@
+[info] Loading settings from plugins.sbt ...
+[info] Loading project definition from /tmp/hw3/project
+[info] Updating {file:/tmp/hw3/project/}hw3-build...
+[info] Done updating.
+[info] Compiling 1 Scala source to /tmp/hw3/project/target/scala-2.12/sbt-1.0/classes ...
+[info] Done compiling.
+[info] Loading settings from build.sbt ...
+[info] Set current project to hw3 (in build file:/tmp/hw3/)
+[info] Updating {file:/tmp/hw3/}root...
+[info] Done updating.
+[info] Compiling 1 Scala source to /tmp/hw3/target/scala-2.12/classes ...
+[info] Done compiling.
+[info] Compiling 11 Scala sources to /tmp/hw3/target/scala-2.12/test-classes ...
+[info] Done compiling.
+[info] IterateNSuite:
+[info] - Iterating + 1 ten times
+[info] - Iterating * 2 five times
+[info] ComposeSuite:
+[info] - Composing +1 and *2
+[info] - Composing *2 and +1
+[info] ReduceSuite:
+[info] - Reducing sum with default 0
+[info] - Reducing difference with default -1
+[info] - Reducing product
+[info] - Empty product
+[info] ZipSuite:
+[info] - Zipping equal length
+[info] - First list longer
+[info] OtherReduceSuite:
+[info] - Reducing sum with default 0
+[info] - Reducing difference with default -1
+[info] - Reducing product
+[info] - Empty product
+[info] IterateWhileSuite:
+[info] - Iterating + 1 while less than 10
+[info] - Iterating * 3 while not ending in 1
+[info] BothSuite:
+[info] - Small and odd
+[info] NeighborsSuite:
+[info] - Adding neighbors, even length
+[info] - Multiplying neighbors, odd length
+[info] - Adding neighbors, empty
+[info] IterateUntilSuite:
+[info] - Iterating * 0.5 until difference < 0.1
+[info] - computing sqrt(2)
+[info] - computing fixed point of cos
+[info] FlipSuite:
+[info] - Flipping args in -
+[info] - Works with + too
+[info] AnySuite:
+[info] - Small, odd, or really large
+[info] Run completed in 527 milliseconds.
+[info] Total number of tests run: 26
+[info] Suites: completed 11, aborted 0
+[info] Tests: succeeded 26, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[success] Total time: 4 s, completed Feb 16, 2018 10:50:12 PM
+
+Total Points : 26
