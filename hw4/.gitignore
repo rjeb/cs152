@@ -1,0 +1,8 @@
+.*
+*.class
+*.jar
+**/target/streams/**
+**/target/*/resolution-cache/**
+**/project/project/**
+**/project/target/**
+/bin/

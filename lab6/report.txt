@@ -1,0 +1,26 @@
+CS 152
+Lab 6
+Names: Jason Thai 010954385, Vincent Diep 007329959
+
+Step 3.
+
+	def firstMatch(str: String, lst1: List[Regex]) : String = {
+		if (lst1.isEmpty){
+			null
+		}
+		else {
+			lst1.head.findPrefixOf(str).getOrElse(firstMatch(str, lst1.tail));
+		}
+	}
+
+
+Step4.
+
+  def tokens(input : String, patterns : List[Regex]) : List[String] = {
+
+	if (input.length == 0) Nil else {
+		val m = firstMatch(input, patterns)
+		if (m == null) Nil else m :: tokens(input.substring(m.length), patterns)	
+	}
+
+  }
