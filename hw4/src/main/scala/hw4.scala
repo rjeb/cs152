@@ -52,12 +52,31 @@ object hw4 extends App{
   
   val wordsForDigits = (digits: String) => {
     val lets = digits.map(c => letters(c.toString))
-    println(lets)
-    lets.reduceLeft(cats(_,_))
+    lets.reduceLeft(cats(_,_)).filter(words.contains(_))
   }
   
-  println(cats(letters("2"), letters("3")).toSet);
-  println(wordsForDigits("23"))
+  val words = io.Source.fromURL("http://horstmann.com/sjsu/spring2018/cs152/words").
+    getLines.filter(w => Character.isLowerCase(w(0)) && w.length > 1).
+    map(_.toUpperCase).toSet + "SCALA"
+    
+  val wordsForDigitsSequence = (seq: List[String]) =>
+    seq.map(e => wordsForDigits(e)).reduceLeft(catsSpaces)
   
+  val catsSpaces = (s: List[String], t: List[String]) => {
+    t.flatMap(y => s.map(x => x + " " + y))
+  }
+  
+  val grow1 = (c: String, substringLists: List[List[String]]) => substringLists.map(s => c::s)
+  
+  val grow2 = (c: String, substringLists: List[List[String]]) => substringLists.map(s => c+s.head::s.tail)
+  
+    
+  
+  println(cats(letters("2"), letters("3")).toSet);
+  println(wordsForDigitsSequence(List("72252", "47", "386")))
+  println(grow2("1", List(List("234"),
+  List("23", "4"),
+  List("2", "34"),
+  List("2", "3", "4"))))
   
 }

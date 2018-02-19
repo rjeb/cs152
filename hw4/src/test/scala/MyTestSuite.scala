@@ -17,5 +17,17 @@ class MyTestSuite extends FunSuite{
     println(hw4.letters("2"))
   }
   
+  //source: https://piazza.com/class/jc2tx52pwh47ad?cid=124
+  test("Testing invalid tokens found") {
+    val reported = List("if|def|val".r, """\p{L}(\p{L}|\p{N}|_)*""".r,
+      """[+-]?\p{N}+""".r, "[+*/%<=>-]".r, "[(){};]".r, """[:.]""".r, "\".*\"".r)
+    val ignored = List("""\p{Z}+""".r, """//.*""".r)
+
+    val input = "if(x<0)& 0 else root(x);"
+
+    assert(tokens(input, reported, ignored) ==
+      (List("if", "(", "x", "<", "0", ")"), 7))
+  }
+  
   
 }
