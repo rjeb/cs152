@@ -70,13 +70,16 @@ object hw4 extends App{
   
   val grow2 = (c: String, substringLists: List[List[String]]) => substringLists.map(s => c+s.head::s.tail)
   
-    
+  val grow = (c: String, a: List[List[String]]) => grow1(c, a) ++ grow2(c,a) 
   
-  println(cats(letters("2"), letters("3")).toSet);
-  println(wordsForDigitsSequence(List("72252", "47", "386")))
-  println(grow2("1", List(List("234"),
-  List("23", "4"),
-  List("2", "34"),
-  List("2", "3", "4"))))
+  val substrings = (s: String) => {
+    val characters = (s: String) => {
+      s.toList
+    }
+    val chars = characters(s.substring(0, s.length-1))
+    chars.foldRight(List(List(s.last.toString())))((b,a) => grow(b.toString(),a))
+  }
+  
+  println(substrings("2728"))
   
 }
