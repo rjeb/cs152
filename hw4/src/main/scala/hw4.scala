@@ -1,6 +1,6 @@
 import scala.util.matching._
 
-object hw4 extends App{
+object hw4{
   //Q1
   def firstMatch(str: String, lst1: List[Regex]) : String = {
 		if (lst1.isEmpty){
@@ -84,9 +84,5 @@ object hw4 extends App{
     substrings(digits).map(wordsForDigitsSequence).flatten
   }
   
-  
-  
-  println(substrings("2728"))
-  println(phoneMnemonics("7225247386"))
   
 }
