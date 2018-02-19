@@ -80,6 +80,13 @@ object hw4 extends App{
     chars.foldRight(List(List(s.last.toString())))((b,a) => grow(b.toString(),a))
   }
   
+  val phoneMnemonics = (digits: String) => {
+    substrings(digits).map(wordsForDigitsSequence).flatten
+  }
+  
+  
+  
   println(substrings("2728"))
+  println(phoneMnemonics("7225247386"))
   
 }
