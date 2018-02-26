@@ -1,0 +1,50 @@
+[info] Loading settings from plugins.sbt ...
+[info] Loading project definition from /tmp/hw4/project
+[info] Updating ProjectRef(uri("file:/tmp/hw4/project/"), "hw4-build")...
+[info] Done updating.
+[info] Compiling 1 Scala source to /tmp/hw4/project/target/scala-2.12/sbt-1.0/classes ...
+[info] Done compiling.
+[info] Loading settings from build.sbt ...
+[info] Set current project to hw4 (in build file:/tmp/hw4/)
+[info] Updating ...
+[info] Done updating.
+[info] Compiling 1 Scala source to /tmp/hw4/target/scala-2.12/classes ...
+[info] Done compiling.
+[info] Compiling 2 Scala sources to /tmp/hw4/target/scala-2.12/test-classes ...
+[info] Done compiling.
+[info] LexerSuite:
+[info] - Everything matched *** FAILED ***
+[info]   (List(Mary),-1) did not equal (List(Mary, had, a, little, lamb),-1) (LexerSuite.scala:5)
+[info] - Everything ignored
+[info] - Everything reported
+[info] - A match failed *** FAILED ***
+[info]   (List(Mary),0) did not equal (List(Mary, had, a, li),13) (LexerSuite.scala:23)
+[info] - C style comments *** FAILED ***
+[info]   (List((, 3),10) did not equal (List((, 3, +, 4, ), *, 5),-1) (LexerSuite.scala:29)
+[info] - Nested C style comments *** FAILED ***
+[info]   (List((, 3),10) did not equal (List((, 3, +, 4, ), *),28) (LexerSuite.scala:35)
+[info] PhoneSuite:
+[info] - cats
+[info] - cats again
+[info] - catsSpaces
+[info] - wordsForDigits
+[info] - wordsForDigits after filtering
+[info] - wordsForDigits again
+[info] - wordsForDigitsSequence
+[info] - wordsForDigitsSequence again
+[info] - grow
+[info] - grow again
+[info] - substrings
+[info] - phoneMnemonics
+[info] - HELLO WORLD
+[info] Run completed in 12 seconds, 594 milliseconds.
+[info] Total number of tests run: 20
+[info] Suites: completed 2, aborted 0
+[info] Tests: succeeded 16, failed 4, canceled 0, ignored 0, pending 0
+[info] *** 4 TESTS FAILED ***
+[error] Failed tests:
+[error] 	LexerSuite
+[error] (Test / test) sbt.TestsFailedException: Tests unsuccessful
+[error] Total time: 20 s, completed Feb 23, 2018 11:16:26 PM
+
+Total Points : 16
