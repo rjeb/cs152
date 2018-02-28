@@ -1,0 +1,48 @@
+Lab 5
+2/12 Lecture
+Jason Thai: 010954385 & Vincent Diep: 007329959
+
+Step 1:
+	1)
+	lst.take(n) will return a list containing the first n elements in lst
+
+		if n is out of bounds, then everything in list is returned
+
+	lst.drop(n) returns a list that does not contain the first n elements
+	
+	2)
+	take returns a list with the first n elements
+	takeRight returns a list without the last n elements
+	
+	the difference is that if the list contains an odd number of elements, these functions will not return the same value
+
+	3)
+	
+	span returns a pair of lists, one that contains elements fulfilling the predicate
+	
+	the second contains the other elements
+	
+	note that the first list only goes up to whenever the first failure case is found; the rest of the list is ignored
+	
+	class example:
+	"foo|bar".span(_ != "|")
+		returns
+			"foo","|bar"
+
+	4)
+	use _.1, _.2
+	
+	
+Step 2:
+	1)
+	(lst.head /: lst.tail) ( _ + " " + _ )
+	// this might not work for empty lists
+	
+	2)
+	
+	3)
+	x is type of seed
+	in this case it is a list
+	y is type of list element
+
+	thus, we are adding ints to the list
