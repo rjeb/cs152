@@ -17,10 +17,7 @@ object hw5part2{
       }
     }
     
-    case class Def[T](name: String, expr: Expr[T]) extends Expr[T]{
-      def eval(symbols : Map[String, T]): T = {
-        expr.eval(symbols)
-      }
+    case class Def[T](name: String, expr: Expr[T]) {
     }
     
     case class Product(args : Expr[Int]*) extends Expr[Int]{

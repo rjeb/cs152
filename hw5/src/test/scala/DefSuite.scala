@@ -25,10 +25,13 @@ class DefSuite extends FunSuite {
   }
   
   test("Def test"){
+    val def1 = Def("x", Const(2))
+    val def2 = Def("y", Const(3))
+    val sym0 = Map[String, Int]();
+    val sym1 = eval(def1, sym0)
+    assert (sym1 == Map("x" -> 2))
     
-    val cat: Expr[String] = new Op[String](_.mkString(""), Const("He"), Const("l"), Const("lo"))
-    val test = new Def[Int]("s", Const(2))
-    assert("Hello" == cat.eval(Map()))
+    
   }
   
   
