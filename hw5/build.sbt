@@ -8,5 +8,6 @@ lazy val root = (project in file(".")).
       version      := "0.1.0-SNAPSHOT"
     )),
     name := "hw5",
-    libraryDependencies += scalaTest % Test
+    libraryDependencies ++= Seq(scalaTest % Test,
+"org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.0")
   )
