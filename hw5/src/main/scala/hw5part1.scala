@@ -13,7 +13,6 @@ object hw5part1{
     }
     
     case class Sum(args : Expr[Int]*) extends Expr[Int]{
-      //val intVals = args.map(_.value)
       def recursiveSum(args1: Expr[Int]*) : Int = {
         if (args1.length == 0) 0
         else args1.head.value + recursiveSum(args1.tail : _*)
@@ -23,7 +22,6 @@ object hw5part1{
     }
     
     case class Product(args : Expr[Int]*) extends Expr[Int]{
-      //val intVals = args.map(_.value)
       def recursiveProduct(args1: Expr[Int]*) : Int = {
         if (args1.length == 0) 1
         else args1.head.value * recursiveProduct(args1.tail : _*)
