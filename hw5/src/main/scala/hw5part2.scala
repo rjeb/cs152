@@ -28,21 +28,23 @@ object hw5part2{
       }
       
       def eval(symbols : Map[String, Int]): Int = {
-        val intVals = args.map(_.eval(symbols))
-        recursiveProduct(intVals:_*)
+        def recursiveProduct(args1: Expr[Int]*) : Int = {
+          if (args1.length == 0) 1
+          else args1.head.eval(symbols) * recursiveProduct(args1.tail : _*)
+        }
+        recursiveProduct(args:_*)
       }
     }
     
     case class Sum(args : Expr[Int]*) extends Expr[Int]{
       
-      def recursiveSum(args1: Int*) : Int = {
-        if (args1.length == 0) 0
-        else args1.head + recursiveSum(args1.tail : _*)
-      }
       
       def eval(symbols : Map[String, Int]): Int = {
-        val intVals = args.map(_.eval(symbols))
-        recursiveSum(intVals:_*)
+        def recursiveSum(args1: Expr[Int]*) : Int = {
+          if (args1.length == 0) 0
+          else args1.head.eval(symbols) + recursiveSum(args1.tail : _*)
+        }
+        recursiveSum(args:_*)
       }
     }
     

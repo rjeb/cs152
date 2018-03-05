@@ -27,7 +27,7 @@ class OpSuite extends FunSuite{
    test("nestedExpr")
    {
       val p = Product(Const(2), Const(3))
-      assert(7 == Sum(Const(1), Const(p.value)).value);
+      assert(7 == Sum(Const(1), p).value);
    }
    
    test("randomExpr")

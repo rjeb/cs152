@@ -13,23 +13,23 @@ object hw5part1{
     }
     
     case class Sum(args : Expr[Int]*) extends Expr[Int]{
-      val intVals = args.map(_.value)
-      def recursiveSum(args1: Int*) : Int = {
+      //val intVals = args.map(_.value)
+      def recursiveSum(args1: Expr[Int]*) : Int = {
         if (args1.length == 0) 0
-        else args1.head + recursiveSum(args1.tail : _*)
+        else args1.head.value + recursiveSum(args1.tail : _*)
       }
-      
-      override def value = recursiveSum(intVals:_*)
+      def fun(x : Int, y : Int):Int = x+y
+      override def value = recursiveSum(args:_*)
     }
     
     case class Product(args : Expr[Int]*) extends Expr[Int]{
-      val intVals = args.map(_.value)
-      def recursiveProduct(args1: Int*) : Int = {
+      //val intVals = args.map(_.value)
+      def recursiveProduct(args1: Expr[Int]*) : Int = {
         if (args1.length == 0) 1
-        else args1.head * recursiveProduct(args1.tail : _*)
+        else args1.head.value * recursiveProduct(args1.tail : _*)
       }
       
-      override def value = recursiveProduct(intVals:_*)
+      override def value = recursiveProduct(args:_*)
     }
     
   object Read extends Expr[Int]{
