@@ -1,0 +1,17 @@
+Names: Jason Thai 010954385, Vincent Diep 007329959
+Lab 10 CS 152
+
+Step 1: 
+1. No looking at the STag grammar rule. 
+2. Yes, looking at the Tags for EmptyElemTag grammar rule it can end with a space (defined by S)
+before the '/>'.
+3. Yes, using the Attribute grammar rule. Eq can contain S which represents whiteSpace.
+
+Step 2:
+1. 
+  class SimpleLanguageParser extends JavaTokenParsers {    
+    def expr: Parser[Any] = "if" ~ "(" ~ wholeNumber  ~")" ~ expr ~ opt("else" ~ expr) | wholeNumber
+  }
+Output: [1.23] parsed: (((((if~()~1)~))~(((((if~()~2)~))~3)~Some((else~4))))~None)
+2. IfExpr1(Number(1), IfExpr(Number(2),Number(3), Number(4))
+3.The left one on the slides. I assume that is the one C++ uses.
