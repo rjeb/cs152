@@ -1,8 +1,7 @@
 import java.io._
 import scala.util.parsing.combinator._
-//commented out because it was annoying my IDE
-/*
-class Expr
+
+  class Expr
   case class Number(value : Int) extends Expr
   case class Variable(name : String) extends Expr
   case class Operator(left : Expr, right : Expr, 
@@ -27,5 +26,6 @@ class SimpleLanguageParser3 extends JavaTokenParsers {
 }
 
 object Main3 extends App {
+
+
 }
-*/

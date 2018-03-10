@@ -1,11 +1,13 @@
 import java.io._
 import scala.util.parsing.combinator._
 
+object Main2 extends App{
+
 class Expr
-case class Number(value : Int) extends Expr
-case class Variable(name : String) extends Expr
-case class Operator(left : Expr, right : Expr, 
-  f: (Int, Int) => Int) extends Expr
+  case class Number(value : Int) extends Expr
+  case class Variable(name : String) extends Expr
+  case class Operator(left : Expr, right : Expr, 
+    f: (Int, Int) => Int) extends Expr
 
   
 class SimpleLanguageParser2 extends JavaTokenParsers {    
@@ -23,8 +25,6 @@ class SimpleLanguageParser2 extends JavaTokenParsers {
   
 }
 
-object Main2 {
-  def main(args : Array[String]) : Unit = {}
   val parser = new SimpleLanguageParser2
   val result = parser.parse(parser.expr, new InputStreamReader(System.in))
   println(result)       
