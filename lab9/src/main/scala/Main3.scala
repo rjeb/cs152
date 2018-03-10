@@ -1,6 +1,7 @@
 import java.io._
 import scala.util.parsing.combinator._
-
+//commented out because it was annoying my IDE
+/*
 class Expr
   case class Number(value : Int) extends Expr
   case class Variable(name : String) extends Expr
@@ -25,5 +26,6 @@ class SimpleLanguageParser3 extends JavaTokenParsers {
   def factor : Parser[Expr] = ident ^^ (x => Variable(x)) | wholeNumber ^^ (x => Number(x.toInt)) | "(" ~> expr <~")"
 }
 
-object Main extends App {
+object Main3 extends App {
 }
+*/
