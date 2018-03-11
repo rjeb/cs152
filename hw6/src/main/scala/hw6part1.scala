@@ -132,16 +132,6 @@ case class Prog(defs: List[Def], expr: Expr) {
 
 
 class SimpleLanguageParser extends JavaTokenParsers { 
-  def checkType(type1: AnyRef) : Int = {
-    type1 match{
-      case a: Def => {
-        1
-      }
-      case b: Expr => {
-        0
-      }
-    }
-  }
   def prog: Parser[Prog] = (rep(valdef) ~ expr) ^^ {
       case x ~ y => {
         Prog(x.toList, y)
