@@ -156,13 +156,6 @@ class SimpleLanguageParser extends JavaTokenParsers {
 
 
   val parser = new SimpleLanguageParser
-  /*
-  val exprTest = Const(6)
-  val defTest = Def("s", exprTest)
-  val progTest = Prog(List(defTest), Var("s"))
-  println(progTest.eval)
-  * 
-  */
   parser.parseAll(parser.prog, new InputStreamReader(System.in)) match {
     case parser.Success(result, next) => println(result.eval)
     case _ => println("Error")

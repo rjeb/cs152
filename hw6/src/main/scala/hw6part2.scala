@@ -20,13 +20,6 @@ class ListParser extends JavaTokenParsers {
     } 
 }
 
-  /*
-  val exprTest = Const(6)
-  val defTest = Def("s", exprTest)
-  val progTest = Prog(List(defTest), Var("s"))
-  println(progTest.eval)
-  * 
-  */
   val parser = new ListParser
 parser.parseAll(parser.list, new InputStreamReader(System.in)) match {
   case parser.Success(result, next) => println(result)
