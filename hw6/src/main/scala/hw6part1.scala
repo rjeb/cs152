@@ -38,6 +38,18 @@ abstract class Expr{
       }
     }
     
+    case class Quotient(args : Expr*) extends Expr{
+      
+      
+      def eval(symbols : Map[String, Int]): Int = {
+        def recursiveQuo(args1: Expr*) : Int = {
+          if (args1.length == 0) 1
+          else args1.head.eval(symbols) / recursiveQuo(args1.tail : _*)
+        }
+        recursiveQuo(args:_*)
+      }
+    }
+    
     case class Sum(args : Expr*) extends Expr{
       
       
@@ -47,6 +59,18 @@ abstract class Expr{
           else args1.head.eval(symbols) + recursiveSum(args1.tail : _*)
         }
         recursiveSum(args:_*)
+      }
+    }
+    
+    case class Difference(args : Expr*) extends Expr{
+      
+      
+      def eval(symbols : Map[String, Int]): Int = {
+        def recursiveDiff(args1: Expr*) : Int = {
+          if (args1.length == 0) 0
+          else args1.head.eval(symbols) - recursiveDiff(args1.tail : _*)
+        }
+        recursiveDiff(args:_*)
       }
     }
     
@@ -105,51 +129,50 @@ case class Prog(defs: List[Def], expr: Expr) {
   }
 }
 
-def eval(expr : Expr[Int], symbols : Map[String, Int]) : Int = expr match {
-      case Const(c) => c
-      case Var(v) => symbols(v)
-      case Sum(s @ _*) => {
-        def recursiveSum(args1: Int*) : Int = {
-          if (args1.length == 0) 0
-          else args1.head + recursiveSum(args1.tail : _*)
-        }
-        
-        val intVals = s.map(_.eval(symbols))
-        recursiveSum(intVals:_*)
-      }
-      case Product(p @ _*) => {
-        def recursiveProduct(args1: Int*) : Int = {
-          if (args1.length == 0) 1
-          else args1.head * recursiveProduct(args1.tail : _*)
-        }
-        
-        val intVals = p.map(_.eval(symbols))
-        recursiveProduct(intVals:_*)
-      }
-      case Op(fun, args @ _*) => {
-        fun.apply(args.map(_.eval(symbols)))
-      }
-      
-}
+
 
 class SimpleLanguageParser extends JavaTokenParsers { 
-  def prog: Parser[Prog] =
+  def checkType(type1: AnyRef) : Int = {
+    type1 match{
+      case a: Def => {
+        1
+      }
+      case b: Expr => {
+        0
+      }
+    }
+  }
+  def prog: Parser[Prog] = (rep(valdef) ~ expr) ^^ {
+      case x ~ y => {
+        Prog(x.toList, y)
+      }
+  }
+  def valdef: Parser[Def] = ("val" ~> ident <~ "=") ~ expr <~ ";" ^^ { case s ~ e => Def(s, e) } 
+
   def expr: Parser[Expr] = (term ~ rep(("+" | "-") ~ term)) ^^ { 
       case a ~ lst =>  (a /: lst) { 
-        case (x, "+" ~ y) => Operator(x, y, _ + _)
-        case (x, "-" ~ y) => Operator(x, y, _ - _)
+        case (x, "+" ~ y) => Sum(x, y)
+        case (x, "-" ~ y) => Difference(x, y)
       }
     } 
   def term: Parser[Expr] = (factor ~ rep(("*" | "/") ~ factor)) ^^ { 
       case a ~ lst =>  (a /: lst) { 
-        case (x, "+" ~ y) => Operator(x, y, _ * _)
-        case (x, "-" ~ y) => Operator(x, y, _ / _)
+        case (x, "*" ~ y) => Product(x, y)
+        case (x, "/" ~ y) => Quotient(x, y)
       }
     } 
-  def factor : Parser[Expr] = ident ^^ (x => Variable(x)) | wholeNumber ^^ (x => Number(x.toInt)) | "(" ~> expr <~")"
+  def factor : Parser[Expr] = ident ^^ (x => Var(x)) | wholeNumber ^^ (x => Const(x.toInt)) | "(" ~> expr <~")"
 }
 
+
   val parser = new SimpleLanguageParser
+  /*
+  val exprTest = Const(6)
+  val defTest = Def("s", exprTest)
+  val progTest = Prog(List(defTest), Var("s"))
+  println(progTest.eval)
+  * 
+  */
   parser.parseAll(parser.prog, new InputStreamReader(System.in)) match {
     case parser.Success(result, next) => println(result.eval)
     case _ => println("Error")
