@@ -34,5 +34,9 @@ class DefSuite extends FunSuite {
     
   }
   
+  test("score compile error test"){
+    assert(Map("x" -> 42) == eval(Def("x", Const(42)), Map()))
+  }
+  
   
 }
