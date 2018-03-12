@@ -38,6 +38,7 @@ abstract class Expr{
       }
     }
     
+    
     case class Quotient(args : Expr*) extends Expr{
       
       
@@ -102,6 +103,25 @@ def eval(expr : Expr, symbols : Map[String, Int]) : Int = expr match {
         val intVals = p.map(_.eval(symbols))
         recursiveProduct(intVals:_*)
       }
+      case Difference(p @ _*) => {
+        def recursiveDiff(args1: Int*) : Int = {
+          if (args1.length == 0) 0
+          else args1.head - recursiveDiff(args1.tail : _*)
+        }
+        
+        val intVals = p.map(_.eval(symbols))
+        recursiveDiff(intVals:_*)
+      }
+      case Quotient(p @ _*) => {
+        def recursiveQuo(args1: Int*) : Int = {
+          if (args1.length == 0) 1
+          else args1.head / recursiveQuo(args1.tail : _*)
+        }
+        
+        val intVals = p.map(_.eval(symbols))
+        recursiveQuo(intVals:_*)
+      }
+      
       case Op(fun, args @ _*) => {
         fun.apply(args.map(_.eval(symbols)))
       }
