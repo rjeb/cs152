@@ -1,0 +1,34 @@
+[info] Loading settings from plugins.sbt ...
+[info] Loading project definition from /tmp/hw5/project
+[info] Updating {file:/tmp/hw5/project/}hw5-build...
+[info] Done updating.
+[info] Compiling 1 Scala source to /tmp/hw5/project/target/scala-2.12/sbt-1.0/classes ...
+[info] Done compiling.
+[info] Loading settings from build.sbt ...
+[info] Set current project to hw5 (in build file:/tmp/hw5/)
+[info] Updating {file:/tmp/hw5/}root...
+[info] Done updating.
+[info] Compiling 3 Scala sources to /tmp/hw5/target/scala-2.12/classes ...
+[info] Done compiling.
+[info] Compiling 3 Scala sources to /tmp/hw5/target/scala-2.12/test-classes ...
+[error] /tmp/hw5/src/test/scala/DefSuite.scala:24:30: overloaded method value eval with alternatives:
+[error]   [T](d: hw5part2.Def[T], symbols: Map[String,T])Map[String,T] <and>
+[error]   [T](expr: hw5part2.Expr[T], symbols: Map[String,T])T
+[error]  cannot be applied to (hw5part2.Def[Int], scala.collection.immutable.Map[Nothing,Nothing])
+[error]     assert(Map("x" -> 42) == eval(Def("x", Const(42)), Map()))
+[error]                              ^
+[error] /tmp/hw5/src/test/scala/OpSuite.scala:18:30: type mismatch;
+[error]  found   : hw5part1.Product
+[error]  required: hw5part1.Op[Int]
+[error]     val p : Op[Int] = Product(Const(2), Const(3))
+[error]                              ^
+[error] /tmp/hw5/src/test/scala/OpSuite.scala:23:24: type mismatch;
+[error]  found   : hw5part1.Rand.type
+[error]  required: hw5part1.Expr[Int]
+[error]     val r: Expr[Int] = Rand
+[error]                        ^
+[error] three errors found
+[error] (test:compileIncremental) Compilation failed
+[error] Total time: 4 s, completed Mar 12, 2018 12:00:48 AM
+
+Total Points : 0
