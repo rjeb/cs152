@@ -45,12 +45,18 @@ class SL1Parser extends JavaTokenParsers {
   
   def factor: Parser[Expr] = wholeNumber ^^ { x : String => Number(x.toInt) } |
     valOrFuncall
-      
-  def valOrFuncall = valOrFun ~ rep( "(" ~> repsep(expr, ",") <~ ")" ) ^^ { 
+   
+  def valOrFuncall: Parser[Expr] = valOrFun ~ rep( "(" ~> repsep(expr, ",") <~ ")" ) ^^ { 
+    case expr ~ args => {
+      args.foldLeft(expr)((A,B) => Funcall(A,B))
+    }
+  } 
+  /*def valOrFuncall = valOrFun ~ rep( "(" ~> repsep(expr, ",") <~ ")" ) ^^ { 
     case expr ~ args => {
         args.foldRight(expr)((A,B) => Funcall(B,A))
     }
   } 
+  */
     
   def valOrFun = "(" ~> expr <~ ")" |       
     ident ^^ { Variable(_) } | 
