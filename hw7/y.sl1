@@ -1,0 +1,4 @@
+val Y = { r => { f => f(f) } ( { f => r({ x => f(f)(x) }) } )} ;
+val almostfac = { f => { x => if (x) x * f(x - 1) else 1 } } ;
+val fac = Y(almostfac) ;
+fac(10)

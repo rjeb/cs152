@@ -17,6 +17,7 @@ case class Function(params : List[String], body : Block) extends Expr
 case class IfExpr(cond : Expr, thenBlock : Block, elseBlock : Block) extends Expr
 case class Funcall(fun : Expr, args : List[Expr]) extends Expr
 case class Cons(a: Expr, b: Expr) extends Expr
+case class ListOp(f : List[Any] => Any) extends Expr
 
 case class Closure(params : List[String], body : Block, var env : List[(String, Any)]) {
   override def toString = "Closure(" + params + "," + body + ")"  
@@ -114,13 +115,15 @@ object SL1 extends App {
     }
     
     case Cons(a, b) => b match{
-      case Variable("Nil") => List(eval(a, symbols)).asInstanceOf[List[Any]]
       case _ => eval(a, symbols) :: eval(b, symbols).asInstanceOf[List[Any]]
     }
+    
     
     case Funcall(fun, args) => eval(fun, symbols) match {
       case Closure(params, body, syms) =>
         evalBlock(body, params.zip(args.map(eval(_, symbols))) ++ syms) 
+      case ListOp(f) => 
+        f.apply(args.map(eval(_, symbols)).head.asInstanceOf[List[Any]])
     }    
     
     case Function(params, body) => Closure(params, body, symbols)
@@ -144,9 +147,11 @@ object SL1 extends App {
     eval(block.expr, (symbols /: block.defs) { evalDef(_, _) } )
 
   val parser = new SL1Parser
+  val preLoadedSyms = List(("Nil", List()), ("isEmpty", ListOp(l => if (l.isEmpty) 1 else 0)),("head", ListOp(l => if (l.isEmpty) 0 else l.head)),
+      ("tail", ListOp(l => if (l.isEmpty) 0 else l.tail)))
   val parseResult = parser.parseAll(parser.block, new InputStreamReader(System.in))
   parseResult match {
-    case parser.Success(result, next) => println(evalBlock(result, List()))
+    case parser.Success(result, next) => println(evalBlock(result, preLoadedSyms))
     case _ => println(parseResult)
   }
 }
