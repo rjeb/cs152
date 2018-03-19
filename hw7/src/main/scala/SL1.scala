@@ -43,20 +43,28 @@ class SL1Parser extends JavaTokenParsers {
       }
     }
   
-  def factor: Parser[Expr] = wholeNumber ^^ { x : String => Number(x.toInt) } |
+  def factor: Parser[Expr] = (rep(factor1 <~("::")) ~ factor1) ^^ {
+    case lst ~ b => {
+      lst.foldRight(b)((x, y) => Cons(x,y))
+    }
+  }
+  
+    
+  def factor1: Parser[Expr] = wholeNumber ^^ { x : String => Number(x.toInt) } |
     valOrFuncall
+    /*
+  def listOp: Parser[Expr] = (factor ~ rep1(("::" ) ~ factor)) ^^ {
+    case a ~ lst => (a /: lst) { 
+        case (x, "::" ~ y) => Cons(x, y)
+    }
+  }
+  */
    
   def valOrFuncall: Parser[Expr] = valOrFun ~ rep( "(" ~> repsep(expr, ",") <~ ")" ) ^^ { 
     case expr ~ args => {
       args.foldLeft(expr)((A,B) => Funcall(A,B))
     }
-  } 
-  /*def valOrFuncall = valOrFun ~ rep( "(" ~> repsep(expr, ",") <~ ")" ) ^^ { 
-    case expr ~ args => {
-        args.foldRight(expr)((A,B) => Funcall(B,A))
-    }
-  } 
-  */
+  }
     
   def valOrFun = "(" ~> expr <~ ")" |       
     ident ^^ { Variable(_) } | 
@@ -103,6 +111,11 @@ object SL1 extends App {
         case result : Int =>
           if (result > 0) evalBlock(block1, symbols) else evalBlock(block2, symbols)
       }
+    }
+    
+    case Cons(a, b) => b match{
+      case Variable("Nil") => List(eval(a, symbols)).asInstanceOf[List[Any]]
+      case _ => eval(a, symbols) :: eval(b, symbols).asInstanceOf[List[Any]]
     }
     
     case Funcall(fun, args) => eval(fun, symbols) match {
