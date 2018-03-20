@@ -1,3 +1,4 @@
+
 import java.io._
 import scala.util.parsing.combinator._
 
@@ -18,6 +19,8 @@ case class IfExpr(cond : Expr, thenBlock : Block, elseBlock : Block) extends Exp
 case class Funcall(fun : Expr, args : List[Expr]) extends Expr
 case class Cons(a: Expr, b: Expr) extends Expr
 case class ListOp(f : List[Any] => Any) extends Expr
+case class Boolean1(a : Boolean) extends Expr
+case class BoolOp(f: List[Boolean1] => Boolean1) extends Expr
 
 case class Closure(params : List[String], body : Block, var env : List[(String, Any)]) {
   override def toString = "Closure(" + params + "," + body + ")"  
@@ -104,6 +107,8 @@ object SL1 extends App {
       eval(cond, symbols) match {
         case result : Int =>
           if (result > 0) evalBlock(block1, symbols) else evalBlock(block2, symbols)
+        case result : Boolean1 =>
+          if (result.a == true) evalBlock(block1, symbols) else evalBlock(block2, symbols)
       }
     }
     
@@ -117,6 +122,8 @@ object SL1 extends App {
         evalBlock(body, params.zip(args.map(eval(_, symbols))) ++ syms) 
       case ListOp(f) => 
         f.apply(args.map(eval(_, symbols)).head.asInstanceOf[List[Any]])
+      case BoolOp(f) => 
+        f.apply(args.map(eval(_, symbols)).asInstanceOf[List[Boolean1]])
     }    
     
     case Function(params, body) => Closure(params, body, symbols)
@@ -140,8 +147,8 @@ object SL1 extends App {
     eval(block.expr, (symbols /: block.defs) { evalDef(_, _) } )
 
   val parser = new SL1Parser
-  val preLoadedSyms = List(("Nil", List()), ("isEmpty", ListOp(l => if (l.isEmpty) 1 else 0)),("head", ListOp(l => if (l.isEmpty) 0 else l.head)),
-      ("tail", ListOp(l => if (l.isEmpty) 0 else l.tail)))
+  val preLoadedSyms = List(("true" -> Boolean1(true)), ("false" -> Boolean1(false)), 
+      ("and" -> BoolOp(b => (Boolean1(b.head.a && b.last.a)))), ("or" -> BoolOp(b => Boolean1(b.head.a || b.last.a))), ("not" -> BoolOp(b => Boolean1(!b.head.a))) )
   val parseResult = parser.parseAll(parser.block, new InputStreamReader(System.in))
   parseResult match {
     case parser.Success(result, next) => println(evalBlock(result, preLoadedSyms))
