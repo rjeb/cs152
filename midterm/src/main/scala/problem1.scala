@@ -1,3 +1,5 @@
+//Jason Thai, Student ID: 010954385
+
 object problem1 extends App {
   def diffs(lst: List[Int]) = {
     def helperFun(lst1: List[Int], lst2: List[Int]) : List[Int] = {
