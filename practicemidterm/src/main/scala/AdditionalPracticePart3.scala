@@ -1,5 +1,31 @@
 import java.io._
 import scala.util.parsing.combinator._
+class SimpleLanguageParser1 extends JavaTokenParsers {
+  def expr: Parser[Int] = (term ~ opt(("+" | "-") ~ expr)) ^^ {
+  case a ~ None => a
+  case a ~ Some("+" ~ b) => a + b
+  case a ~ Some("-" ~ b) => a - b
+  }
+  def term: Parser[Int] = (factor ~ opt(("*" | "/") ~ expr)) ^^ {
+  case a ~ None => a
+  case a ~ Some("*" ~ b) => a * b
+  case a ~ Some("/" ~ b) => a / b
+  }
+  def factor: Parser[Int] = sqrtp | wholeNumber ^^ (_.toInt) | "(" ~> expr <~ ")"
+  def sqrtp : Parser[Int] = ("sqrt" ~ factor) ^^ {
+    case a ~ b => {
+      (math.sqrt(b.toInt)).asInstanceOf[Int]
+    }
+  }
+}
+object AdditionalPracticePart3 extends App {
+  val parser = new SimpleLanguageParser1
+  val result = parser.parse(parser.expr, new InputStreamReader(System.in))
+  println(result)
+}
+/*
+import java.io._
+import scala.util.parsing.combinator._
 import scala.math._
 
 //Change the arithmetic parser from the lab of lecture 10 
@@ -189,3 +215,4 @@ class SimpleLanguageParser extends JavaTokenParsers {
     case _ => println("Error")
 }    
 }
+*/
