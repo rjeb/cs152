@@ -141,4 +141,13 @@ object SL1 extends App {
     case parser.Success(result, next) => println(evalBlock(result, List()))
     case _ => println(parseResult) // evalutated to the correct -66535
   }
+  
+  /*
+  val parseResult1 = parser.parseAll(parser.block, "2 ^ 3 ^ 2 ^ 1")
+  parseResult1 match {
+    case parser.Success(result1, next) => println(evalBlock(result1, List()))
+    case _ => println(parseResult1) // evalutated to the correct 512
+  }
+  //additional test case prints out the correct expected output: 512
+  */
 }
