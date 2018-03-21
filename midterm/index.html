@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='content-type'/> 
+    <title>Green Sheet</title> 
+    <link href='styles.css' rel='stylesheet' type='text/css'/> 
+  </head>
+  <body><h1>San Jose State University | CS 152 Section 3 | Spring 2018</h1>
+    <h2>Midterm Exam</h2>
+    <h3>Exam Rules</h3>
+    <ul><li>You may put any files that you like on your laptop, including the slides, the Scala API, and your and my homework and lab solutions.</li>
+      <li>You may NOT use the Internet for anything during the exam. </li>
+      <li>You may NOT communicate with anyone other than the exam proctor.</li>
+      <li>All your exam work must be in a folder called <code>midterm</code> in your repo.</li>
+      <li>Submit the requested files <code>problem1.scala</code>, <code>problem2.scala</code>, and so on, inside the <code>src/main/scala</code> directory.</li>
+      <li>You <b>must</b> run git commit every 10 minutes.</li>
+      <li>When the exam is over, run git push to push your repo.</li>
+      <li>The exam is 70 minutes long.</li>
+    </ul>
+    <h3>Exam Problems</h3>
+
+    <ol><li>Write a Scala function <code>diffs</code> that receives a <code>List[Int]</code> with at least two elements and returns a <code>List[Int]</code> with the differences of adjacent elements. Use a recursive helper function. For example,
+        <pre>diffs(List(1, 7, 2, 9))
+</pre> returns
+        <pre>List(-6, 5, -7)
+</pre>
+        Submit a file <code>problem1.scala</code>
+      </li>
+      <li>Repeat the preceding exercise, but now use a right fold. This is a bit tricky because the fold operation (which you need to design) only sees one new element at a time. Use as a seed value a tuple <code>(<var>partial result list</var>, <var>previously seen value</var>)</code> Your operator should take in the next list value, prepend the difference to the list and update the previously seen value. As another complexity, in the very first step, you can't yet do anything because you have nothing to subtract. Solve this by using an <code>Option</code> for the previously seen value. Submit <code>problem2.scala</code> with your function and a comment showing the fold diagram in ASCII art.</li>
+      <li>Given two lists of integer digits, produce a list of all combinations of the first and second. Use <code>map</code>/<code>flatMap</code>. For example,
+        <pre>allCombinations(List(1, 2), List(3, 4, 5))</pre> yields
+        <pre>List(13, 14, 15, 23, 24, 25)
+</pre></li>
+      <li>Change the expression parser so that it can handle Boolean expressions with <code>||</code> <code>&amp;&amp;</code> <code>!</code> instead of integers and arithmetic. Instead of <code>wholeNumber</code>, accept <code>true</code> or <code>false</code>. <code>&amp;&amp;</code> binds stronger than <code>||</code>. For example, <code>!true || !false &amp;&amp; !!true</code> evalues to <code>true</code>.</li>
+      <li>Enhance SL1 so that it can handle <code>^</code> as a “raise to a power” operator. Raising to a power  binds more strongly than multiplication/division and is right-associative. For example, 4^2^3 = 4^(2^3) = 65536. For your convenience, here is
+        <pre>def intpow(a: Int, b: Int) = math.pow(a, b).asInstanceOf[Int]</pre></li>
+    </ol>
+  </body>
+</html>
