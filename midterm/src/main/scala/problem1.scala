@@ -9,5 +9,6 @@ object problem1 extends App {
     helperFun(lst, List())
   }
 
+  println(diffs(List(1,7,2,9)))
   println(diffs(List(3, 1, 4, 1, 5, 9, 2, 6)))
 }
