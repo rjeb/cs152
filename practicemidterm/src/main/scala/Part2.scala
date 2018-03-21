@@ -39,12 +39,6 @@ class StringParser extends JavaTokenParsers {
   
   def strLit: Parser[String] = ident ^^ (x => x.toString())
   
-  def subString : Parser[String] = (factor ~"("~ num ~ "," ~ num ~ ")") ^^ {
-    case a ~ b ~ c ~ d ~ e ~ f => {
-      println("You got here")
-      a.substring(c, e)
-    }
-  }
 }
 
   val parser = new StringParser
