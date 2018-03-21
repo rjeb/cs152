@@ -43,18 +43,16 @@ class SL1Parser extends JavaTokenParsers {
       }
     }
   
+  //added new parser with priority over (* and /) for "^"
   def factor: Parser[Expr] = (factor1 ~ rep(("^")~> factor1)) ^^ { 
       case a ~ lst => {
-        val reduced = lst.foldRight(1) ((x,y) => intpow(SL1.eval(x, List()).asInstanceOf[Int], y))
-        Number(intpow(SL1.eval(a, List()).asInstanceOf[Int], reduced))
+        //first completes everything thats not the absolute base number
+        //ex. 4 ^ 2 ^ 3 ^ 5 is seperated into Int 4 and List (2,3,5). (2^(3^5)) is compelted first
+        //by folding the list
+        val reducedExponent = lst.foldRight(1) ((x,y) => intpow(SL1.eval(x, List()).asInstanceOf[Int], y))
+        //then we calculate the base to the power of the calculated exponent
+        Number(intpow(SL1.eval(a, List()).asInstanceOf[Int], reducedExponent))
       }
-        
-        /* left assosiative implementation
-        (a /: lst) { 
-        case (x, "^" ~ y) => Operator(x, y, intpow)
-      }
-      * 
-      */
     }
   
   def factor1: Parser[Expr] = wholeNumber ^^ { x : String => Number(x.toInt) } |
@@ -141,6 +139,6 @@ object SL1 extends App {
   val parseResult = parser.parseAll(parser.block, "1 + (-1) * 4 ^ 2 ^ 3")
   parseResult match {
     case parser.Success(result, next) => println(evalBlock(result, List()))
-    case _ => println(parseResult)
+    case _ => println(parseResult) // evalutated to the correct -66535
   }
 }
