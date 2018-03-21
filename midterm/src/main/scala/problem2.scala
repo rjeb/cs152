@@ -1,4 +1,5 @@
 object problem2 extends App {
+  /*
   def diffs(lst : List[Int]) = {
     val seed: (List[Int], Option[Int]) = (Nil, None)
     val foldResult = (lst :\ seed)((element, state) => 
@@ -12,4 +13,5 @@ object problem2 extends App {
 
    */
    println(diffs(List(1, 7, 2, 9)))
+   */
 }
