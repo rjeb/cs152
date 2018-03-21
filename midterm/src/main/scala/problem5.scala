@@ -45,8 +45,8 @@ class SL1Parser extends JavaTokenParsers {
   
   def factor: Parser[Expr] = (factor1 ~ rep(("^")~> factor1)) ^^ { 
       case a ~ lst => {
-        val reduced = lst.foldRight(1) ((a,b) => intpow(SL1.eval(a, List()).asInstanceOf[Int], b))
-        Number(reduced)
+        val reduced = lst.foldRight(1) ((x,y) => intpow(SL1.eval(x, List()).asInstanceOf[Int], y))
+        Number(intpow(SL1.eval(a, List()).asInstanceOf[Int], reduced))
       }
         
         /* left assosiative implementation
