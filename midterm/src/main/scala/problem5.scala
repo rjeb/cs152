@@ -16,7 +16,6 @@ case class Operator(left : Expr, right : Expr,
 case class Function(params : List[String], body : Block) extends Expr
 case class IfExpr(cond : Expr, thenBlock : Block, elseBlock : Block) extends Expr
 case class Funcall(fun : Expr, args : List[Expr]) extends Expr
-
 case class Closure(params : List[String], body : Block, var env : List[(String, Any)]) {
   override def toString = "Closure(" + params + "," + body + ")"  
 }
@@ -44,7 +43,13 @@ class SL1Parser extends JavaTokenParsers {
       }
     }
   
-  def factor: Parser[Expr] = wholeNumber ^^ { x : String => Number(x.toInt) } |
+  def factor: Parser[Expr] = (factor1 ~ rep(("^") ~ factor1)) ^^ { 
+      case a ~ lst =>  (a /: lst) { 
+        case (x, "^" ~ y) => Operator(x, y, intpow)
+      }
+    }
+  
+  def factor1: Parser[Expr] = wholeNumber ^^ { x : String => Number(x.toInt) } |
       "(" ~> expr <~ ")" | valOrFuncall 
       
   def valOrFuncall = valOrFun ~ opt( "(" ~> repsep(expr, ",") <~ ")" ) ^^ { 
