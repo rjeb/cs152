@@ -1,0 +1,21 @@
+Lab 12
+3/14 Lecture 13
+Jason Thai: 010954385 & Vincent Diep: 007329959
+
+Step 1:
+	x="2"
+
+	function f {
+	   echo $x
+	}
+
+	function main {
+	   local x="3" ; 
+	   f ;
+	}
+
+	main
+	
+	// Output is 3
+	
+	// This tells us that bash is dynamically scoped
