@@ -1,0 +1,24 @@
+ RUBRIC
+sbt run < reverse.sl1 (max. 4 points):
+sbt run < curry.sl1 (max. 2 points):
+sbt run < test1.sl1 (max. 2 points): 
+sbt run < test2.sl1 (max. 2 points): 
+sbt run < y.sl1 (max. 2 points): 
+sbt run < revlist.sl1 (max. 4 points):
+sbt run < test3.sl1 (max. 2 points): 
+sbt run < test4.sl1 (max. 2 points): 
+sbt run < yrevlist.sl1 (max. 2 points): 
+
+
+ Your Test Run Result:
+1729
+12
+42
+1729
+3628800
+List(5, 4, 3, 2, 1)
+List(1, 3)
+List(4, 3, 2, 1)
+List(5, 4, 3, 2, 1)
+
+Total Points : 22

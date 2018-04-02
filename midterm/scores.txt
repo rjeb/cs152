@@ -1,0 +1,42 @@
+Problem 1
+
+Defines recursive helper (max. 2): 10
+Calls recursive helper (max. 2):
+Base case (max. 2):
+Length > 1 (max. 2):
+Length 1 (max. 2):
+
+Problem 2
+
+Fold call (max. 3): 3
+Fold function empty case (max. 2): 2
+Fold function nonempty case (max. 2): 2
+Fold diagram (max. 3): 1
+
+That's the diagram of a left fold
+
+Problem 3
+
+Flatmap, then map (max. 3):5
+Combines elements correctly (max. 2): 
+
+Problem 4
+
+Parses "true"/"false" to Boolean values (max. 2): 10
+||, && parsed with correct precedence (max. 2): 
+||, && evaluated (max. 2): 
+! parsed and evaluated (max. 2): 
+Multiple ! (max. 2): 
+
+Problem 5
+
+Parses ^ (max. 2):2
+Evaluates ^ (max. 2):0
+
+You need to return an Operator to support delayed evaluation
+
+Correct precedence (max. 3):3
+Right associative (max. 3): 3
+
+
+41 A
