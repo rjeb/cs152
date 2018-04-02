@@ -1,0 +1,17 @@
+Names: Jason Thai 010954385, Vincent Diep 007329959
+Lab 14 CS 152
+
+Step 1.
+
+a. (map() (lambda(i) (print i) (newline)) '(1 2 3 4 5))
+b. 
+c. in, do
+d. for var in values do body...
+e. (map (lambda(var) body ...) values))
+f. 
+1
+2
+3
+4
+5
+'(#<void> #<void> #<void> #<void> #<void>)
