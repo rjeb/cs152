@@ -1,0 +1,8 @@
+(define (save-pict picture filename)
+(send (pict->bitmap picture) save-file filename 'png))
+(randoms 100 100)
+(save-pict (first (mondrian 40 40 '(.1 .1))) "test1.png")
+(save-pict (first (mondrian 40 60 '(.5 .5 .5 .5 .5 .08))) "test2.png")
+(save-pict (first (mondrian 60 40 '(.5 .5 .5 .5 .5 .2))) "test3.png")
+(save-pict (first (mondrian 60 60 '(.5 .5 .5 .5 .5 .5 .5 .5 .5 .5 .1))) "test4.png")
+(save-pict (first (mondrian 400 400 (randoms 923275777777 200))) "mondrian.png")
