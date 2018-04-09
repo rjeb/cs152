@@ -32,20 +32,90 @@
 )
 
 (define (mondrian x y rands)
-    mondrianHelper(x y rands '())
-)
-
-(define (mondrianHelper x y rands returnLst)
-   
-  (letrec ([width (list x)]
-         [height (list y)]
+  (letrec ((width x)
+         (height y)
          (wide-enough (lambda (w r) (and (> w 50) (> (/ w width) (* 0.5 r)))))
          (tall-enough (lambda (h r) (and (> h 50) (> (/ h height) (* 0.5 r)))))
-         (big-enough (lambda (w r1 h r2) (and (wide-enough) (tall-enough))))
-         (mondrian-helper (lambda (x y rands returnLst) '(1 2 3)))
+         (big-enough (lambda (w r1 h r2) (and (wide-enough w r1) (tall-enough h r2))))
+         (mondrian-helper (lambda (x y rands)
+         (if(big-enough x (first rands) y (first(rest rands)))
+            (if (> (first rands) .5)
+                (hc-append
+                 (if (> (first (rest rands)) .5)
+                     (vc-append
+                      (mondrian-helper (/ x 3) (/ y 3) (rest rands))
+                      (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest(rest rands)))
+                      )
+                     (vc-append
+                      (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (rest rands))
+                      (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest (rest rands)))
+                     )
+                  )
+                 (if (> (first (rest rands)) .5)
+                     (vc-append
+                      (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest rands))
+                      (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (rest(rest rands)))
+                      )
+                     (vc-append
+                      (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest rands))
+                      (mondrian-helper (/ x 3) (/ y 3) (rest (rest rands)))
+                     )
+                  )
+                 )
+                (hc-append
+                 (if (> (first (rest rands)) .5)
+                     (vc-append
+                      (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest rands))
+                      (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest(rest rands)))
+                      )
+                     (vc-append
+                      (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest rands))
+                      (mondrian-helper (/ x 3) (/ y 3) (rest (rest rands)))
+                     )
+                  )
+                 )
+
+            )
+            (if (wide-enough x (first rands))
+                (if (> (first rands) .5)
+                        (hc-append
+                         (mondrian-helper (/ x 3) y (rest rands))
+                         (mondrian-helper (* (/ x 3) 2) y (rest(rest rands)))
+                        )
+                        (hc-append
+                         (mondrian-helper (* (/ x 3) 2) y (rest rands))
+                         (mondrian-helper (/ x 3) y (rest (rest rands)))
+                        )
+                )
+                (if (tall-enough y (first rands))
+                    (if (> (first rands) .5)
+                        (vc-append
+                         (mondrian-helper x (/ y 3) (rest rands))
+                         (mondrian-helper x (* (/ y 3) 2) (rest(rest rands)))
+                        )
+                        (vc-append
+                         (mondrian-helper x (* (/ y 3) 2) (rest rands))
+                         (mondrian-helper x (/ y 3) (rest (rest rands)))
+                        )
+                    )
+                    ;;if not big,tall, or wide enough fill in the square
+                    (if(> (first rands) .25)
+                       (cc-superimpose (colorize (filled-rectangle x y) "white") (rectangle (+ x 2) (+ y 2)))
+                       ;;if it's not white it is either red, yellow, or blue
+                       (if (> (first rands) .1667)
+                           (cc-superimpose (colorize (filled-rectangle x y) "yellow") (rectangle (+ x 2) (+ y 2)))
+                           (if (> (first rands) .0833)
+                               (cc-superimpose (colorize (filled-rectangle x y) "skyblue") (rectangle (+ x 2) (+ y 2)))
+                               (cc-superimpose (colorize (filled-rectangle x y) "red") (rectangle (+ x 2) (+ y 2)))
+                           )
+                       )
+                    )
+                )
+             )
+         )))
          )
-    (mondrian-helper x y rands returnLst)
-  )  
+    (mondrian-helper x y rands)
+  )
   
 )
 
@@ -60,4 +130,5 @@
 ;(define expr (mondrian 40 40 (randoms 3023467485 40)))
 ;(define expr '((cc-superimpose (colorize (filled-rectangle x y) "yellow") (rectangle (+ x 2) (+ y 2)))))
 ;(eval expr ns)
-(mondrian 40 40 (randoms 3023467485 40))
+;(mondrian 2000 40 (randoms 323231 40))
+(mondrian 200 200 '(.6 .6 .6 .6 .6 .6 .6 .6))
