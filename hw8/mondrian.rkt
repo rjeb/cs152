@@ -71,7 +71,7 @@
                      )
                      )
                   )
-                 ) (rest (rest (rest (rest rands))))
+                 ) (second (mondrian-helper (/ x 3) (/ y 3) (second (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest (rest (rest rands)))))))
                 )
                 )
                 (list
@@ -102,7 +102,7 @@
                      )
                      )
                   )
-                 ) (rest (rest (rest (rest rands))))
+                 ) (second (mondrian-helper (/ x 3) (* (/ y 3) 2) (second (mondrian-helper (/ x 3) (/ y 3) (rest (rest (rest rands)))))))
                 )
 
             )
@@ -123,7 +123,7 @@
                      (first (mondrian-helper (/ x 3) y (second (mondrian-helper (* (/ x 3) 2) y (rest (rest rands))))))
                      )
                     )
-                ) (rest (rest (rest rands)))
+                ) (second (mondrian-helper (/ x 3) y (second (mondrian-helper (* (/ x 3) 2) y (rest (rest rands))))))
                 )
                 )
                 (if (tall-enough y (first rands))
@@ -176,12 +176,8 @@
 )
 
 (randoms 100 100)
-;;(define (save-pict picture filename)
-;  (send (pict->bitmap picture) save-file filename 'png))
-
-(randoms 100 100)
 (mondrian 40 40 '(.1 .1))
 (mondrian 40 60 '(.1 .1 .1 .5 .01 .1 .1))
 (mondrian 40 150 '(.1 .1 .1 .5 .5 .09 .2 .5 .5 .5 .2))
 
-(mondrian 400 400 (randoms 29 40))
+(mondrian 400 400 (randoms 9 90))
