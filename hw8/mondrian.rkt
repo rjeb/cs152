@@ -1,1 +1,51 @@
 #lang slideshow
+(define (randoms seed size)
+  (if (= size 0)
+  '()
+  ;;first element is seed / m
+  (randomList seed size (list (/ seed 4294967296.0)) (/ seed 4294967296.0))
+  )
+)
+
+(define (randomList seed size lst prevElem)
+  (if (= (length lst) size)
+  lst
+  (randomList seed size (cons (/ (modulo ( exact-round (+ (* prevElem 1664525) 1013904223) ) 4294967296) 4294967296.0) lst) (modulo ( exact-round (+ (* prevElem 1664525) 1013904223) ) 4294967296))
+  )
+)
+
+(define (mondrianSquare x y rands)
+  (if (< x 50)
+      (if (< y 50)
+          ;;choose a color at random
+          (if (< (first rands) .33)
+              (cc-superimpose (colorize (filled-rectangle x y) "skyblue") (rectangle (+ x 2) (+ y 2)))
+              (if (> (first rands) .66)
+                (cc-superimpose (colorize (filled-rectangle x y) "yellow") (rectangle (+ x 2) (+ y 2)))
+                (cc-superimpose (colorize (filled-rectangle x y) "red") (rectangle (+ x 2) (+ y 2)))
+                  ))
+          (values)
+          )
+      (values)
+  )
+)
+
+(define (mondrian x y rands)
+  (if (< x 50)
+      (if (< y 50)
+          ;;choose a color at random
+          (if (< (first rands) .33)
+              (cc-superimpose (colorize (filled-rectangle x y) "skyblue") (rectangle (+ x 2) (+ y 2)))
+              (if (> (first rands) .66)
+                (cc-superimpose (colorize (filled-rectangle x y) "yellow") (rectangle (+ x 2) (+ y 2)))
+                (cc-superimpose (colorize (filled-rectangle x y) "red") (rectangle (+ x 2) (+ y 2)))
+                  ))
+          (values)
+          )
+      (values)
+  )
+)
+
+(randoms 3023467485 40)
+(mondrianSquare 40 40 '(.2))
+;;(mondrian 40 40 (randoms 3023467485 40))
