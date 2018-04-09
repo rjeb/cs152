@@ -43,117 +43,125 @@
             (begin
             (if (> (first (rest rands)) .5)
                 (begin
+                (list
                 (hc-append
                  (if (> (first (rest (rest rands))) .5)
                      (begin
                      (hc-append
                      (vc-append
-                      (mondrian-helper (/ x 3) (/ y 3) (rest (rest (rest rands))))
-                      (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest (rest (rest rands))))
+                      (first (mondrian-helper (/ x 3) (/ y 3) (rest (rest (rest rands)))))
+                      (first (mondrian-helper (/ x 3) (* (/ y 3) 2) (second (mondrian-helper (/ x 3) (/ y 3) (rest (rest (rest rands)))))))
                       )
                      (vc-append
-                      (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest (rest (rest rands))))
-                      (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (rest (rest (rest rands))))
+                      (first (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest (rest (rest rands)))))
+                      (first (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (second (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest (rest (rest rands)))))))
                       )
                      )
                      )
                      (begin
                      (hc-append
                      (vc-append
-                      (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (rest (rest (rest rands))))
-                      (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest (rest (rest rands))))
+                      (first (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (rest (rest (rest rands)))))
+                      (first (mondrian-helper (* (/ x 3) 2) (/ y 3) (second (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (rest (rest (rest rands)))))))
                      )
                      (vc-append
-                      (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest (rest (rest rands))))
-                      (mondrian-helper (/ x 3) (/ y 3) (rest (rest (rest rands))))
+                      (first (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest (rest (rest rands)))))
+                      (first (mondrian-helper (/ x 3) (/ y 3) (second (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest (rest (rest rands)))))))
                      )
                      )
                      )
                   )
-                 )
+                 ) (rest (rest (rest (rest rands))))
                 )
+                )
+                (list
                 (hc-append
                  (if (> (first (rest (rest rands))) .5)
                      (begin
                      (hc-append
                      (vc-append
-                      (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest (rest (rest rands))))
-                      (mondrian-helper (/ x 3) (/ y 3) (rest (rest (rest rands))))
+                      (first (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest (rest (rest rands)))))
+                      (first (mondrian-helper (/ x 3) (/ y 3) (second (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest (rest (rest rands)))))))
                       )
                      (vc-append
-                      (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (rest (rest (rest rands))))
-                      (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest (rest (rest rands))))
+                      (first (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (rest (rest (rest rands)))))
+                      (first (mondrian-helper (* (/ x 3) 2) (/ y 3) (second (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (rest (rest (rest rands)))))))
                       )
                      )
                      )
                      (begin
                      (hc-append
                      (vc-append
-                      (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest (rest (rest rands))))
-                      (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (rest (rest (rest rands))))
+                      (first (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest (rest (rest rands)))))
+                      (first (mondrian-helper (* (/ x 3) 2) (* (/ y 3) 2) (second (mondrian-helper (* (/ x 3) 2) (/ y 3) (rest (rest (rest rands)))))))
                      )
                      (vc-append
-                      (mondrian-helper (/ x 3) (/ y 3) (rest (rest (rest rands))))
-                      (mondrian-helper (/ x 3) (* (/ y 3) 2) (rest (rest (rest rands))))
+                      (first (mondrian-helper (/ x 3) (/ y 3) (rest (rest (rest rands)))))
+                      (first (mondrian-helper (/ x 3) (* (/ y 3) 2) (second (mondrian-helper (/ x 3) (/ y 3) (rest (rest (rest rands)))))))
                      )
                      )
                      )
                   )
-                 )
+                 ) (rest (rest (rest (rest rands))))
+                )
 
             )
             )
             (if (wide-enough x (first rands))
                 (begin
+                (list
                 (if (> (first (rest rands)) .5)
                     (begin
                      (hc-append
-                      (mondrian-helper (/ x 3) y (rest (rest rands)))
-                      (mondrian-helper (* (/ x 3) 2) y (rest (rest rands)))
+                      (first (mondrian-helper (/ x 3) y (rest (rest rands))))
+                      (first (mondrian-helper (* (/ x 3) 2) y (second (mondrian-helper (/ x 3) y (rest (rest rands))))))
                       )
                      )
                     (begin
                     (hc-append
-                     (mondrian-helper (* (/ x 3) 2) y (rest (rest rands)))
-                     (mondrian-helper (/ x 3) y (rest (rest rands)))
+                     (first (mondrian-helper (* (/ x 3) 2) y (rest (rest rands))))
+                     (first (mondrian-helper (/ x 3) y (second (mondrian-helper (* (/ x 3) 2) y (rest (rest rands))))))
                      )
                     )
+                ) (rest (rest (rest rands)))
                 )
                 )
                 (if (tall-enough y (first rands))
                     (begin
+                    (list
                     (if (> (first (rest rands)) .5)
                         (begin
                         (vc-append
-                         (mondrian-helper x (/ y 3) (rest (rest rands)))
-                         (mondrian-helper x (* (/ y 3) 2) (rest (rest rands)))
+                         (first (mondrian-helper x (/ y 3) (rest (rest rands))))
+                         (first (mondrian-helper x (* (/ y 3) 2) (second (mondrian-helper x (/ y 3) (rest (rest rands))))))
                         )
                         )
                         (begin
                         (vc-append
-                         (mondrian-helper x (* (/ y 3) 2) (rest (rest rands)))
-                         (mondrian-helper x (/ y 3) (rest (rest rands)))
+                         (first (mondrian-helper x (* (/ y 3) 2) (rest (rest rands))))
+                         (first (mondrian-helper x (/ y 3) (second (mondrian-helper x (* (/ y 3) 2) (rest (rest rands))))))
                         )
                         )
+                    ) (rest (rest (rest rands)))
                     )
                     )
                     ;;if not big,tall, or wide enough fill in the square
                     ;;a random number is consumed even though the rect is too small
-                    (if(> (first rands) .25)
+                    (if(> (first (rest rands)) .25)
                        (begin
-                       (cc-superimpose (colorize (filled-rectangle x y) "white") (rectangle x y))
+                       (list (cc-superimpose (colorize (filled-rectangle x y) "white") (rectangle x y)) (rest (rest rands)))
                        )
                        ;;if it's not white it is either red, yellow, or blue
                        (if (> (first rands) .1667)
                            (begin
-                           (cc-superimpose (colorize (filled-rectangle x y) "yellow") (rectangle x y))
+                           (list (cc-superimpose (colorize (filled-rectangle x y) "yellow") (rectangle x y)) (rest (rest rands)))
                            )
                            (if (> (first rands) .0833)
                                (begin
-                               (cc-superimpose (colorize (filled-rectangle x y) "blue") (rectangle x y))
+                               (list (cc-superimpose (colorize (filled-rectangle x y) "blue") (rectangle x y)) (rest (rest rands)))
                                )
                                (begin
-                               (cc-superimpose (colorize (filled-rectangle x y) "red") (rectangle x y))
+                               (list (cc-superimpose (colorize (filled-rectangle x y) "red") (rectangle x y)) (rest (rest rands)))
                                )
                            )
                        )
@@ -162,16 +170,18 @@
              )
          )))
          )
-    (define a (mondrian-helper x y rands))
-    (list a rands)
+    (mondrian-helper x y rands)
   )
   
 )
 
 (randoms 100 100)
-(define (save-pict picture filename)
-  (send (pict->bitmap picture) save-file filename 'png))
+;;(define (save-pict picture filename)
+;  (send (pict->bitmap picture) save-file filename 'png))
 
-(mondrian 40 40 '(.10))
+(randoms 100 100)
+(mondrian 40 40 '(.1 .1))
+(mondrian 40 60 '(.1 .1 .1 .5 .01 .1 .1))
+(mondrian 40 150 '(.1 .1 .1 .5 .5 .09 .2 .5 .5 .5 .2))
 
-(mondrian 400 400 (randoms 493545829 40))
+(mondrian 400 400 (randoms 29 40))
