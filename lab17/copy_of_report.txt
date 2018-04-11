@@ -1,0 +1,182 @@
+Names: Jason Thai 010954385, Vincent Diep 007329959
+Lab 17 CS 152
+4/11 Lecture 18
+
+Step 1
+	1. 
+	?- parent(charles1, X).
+	X = charles2 ;
+	X = catherine ;
+	X = james2.
+
+	2.
+	grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+
+	Query for Grandparent of Sophia:
+	grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+
+	Query for grandchildren of James1:
+	grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+
+	3.
+	sibling(X, Y) :- parent(Z, X), parent(Z, Y).
+
+	Test Query: 
+	?- sibling(charles2, X).
+	
+Step 2
+
+1. 
+
+?- ancestor(X, sophia).
+X = elizabeth ;
+X = james1 ;
+false.
+
+?- ancestor(james1, X).
+X = charles1 ;
+X = elizabeth ;
+X = charles2 ;
+X = catherine ;
+X = james2 ;
+X = sophia ;
+X = george1 ;
+false.
+
+2.
+	?- trace.
+	true.
+
+	[trace]  ?- ancestor(X, sophia).
+	   Call: (7) ancestor(_G3626, sophia) ? creep
+	   Call: (8) parent(_G3626, sophia) ? creep
+	   Exit: (8) parent(elizabeth, sophia) ? creep
+	   Exit: (7) ancestor(elizabeth, sophia) ? creep
+	X = elizabeth ;
+	   Redo: (7) ancestor(_G3626, sophia) ? creep
+	   Call: (8) parent(_G3626, _G3703) ? creep
+	   Exit: (8) parent(james1, charles1) ? creep
+	   Call: (8) ancestor(charles1, sophia) ? creep
+	   Call: (9) parent(charles1, sophia) ? creep
+	   Fail: (9) parent(charles1, sophia) ? creep
+	   Redo: (8) ancestor(charles1, sophia) ? creep
+	   Call: (9) parent(charles1, _G3703) ? creep
+	   Exit: (9) parent(charles1, charles2) ? creep
+	   Call: (9) ancestor(charles2, sophia) ? creep
+	   Call: (10) parent(charles2, sophia) ? creep
+	   Fail: (10) parent(charles2, sophia) ? creep
+	   Redo: (9) ancestor(charles2, sophia) ? creep
+	   Call: (10) parent(charles2, _G3703) ? creep
+	   Fail: (10) parent(charles2, _G3703) ? creep
+	   Fail: (9) ancestor(charles2, sophia) ? creep
+	   Redo: (9) parent(charles1, _G3703) ? creep
+	   Exit: (9) parent(charles1, catherine) ? creep
+	   Call: (9) ancestor(catherine, sophia) ? creep
+	   Call: (10) parent(catherine, sophia) ? creep
+	   Fail: (10) parent(catherine, sophia) ? creep
+	   Redo: (9) ancestor(catherine, sophia) ? creep
+	   Call: (10) parent(catherine, _G3703) ? creep
+	   Fail: (10) parent(catherine, _G3703) ? creep
+	   Fail: (9) ancestor(catherine, sophia) ? creep
+	   Redo: (9) parent(charles1, _G3703) ? creep
+	   Exit: (9) parent(charles1, james2) ? creep
+	   Call: (9) ancestor(james2, sophia) ? creep
+	   Call: (10) parent(james2, sophia) ? creep
+	   Fail: (10) parent(james2, sophia) ? creep
+	   Redo: (9) ancestor(james2, sophia) ? creep
+	   Call: (10) parent(james2, _G3703) ? creep
+	   Fail: (10) parent(james2, _G3703) ? creep
+	   Fail: (9) ancestor(james2, sophia) ? creep
+	   Fail: (8) ancestor(charles1, sophia) ? creep
+	   Redo: (8) parent(_G3626, _G3703) ? creep
+	   Exit: (8) parent(james1, elizabeth) ? creep
+	   Call: (8) ancestor(elizabeth, sophia) ? creep
+	   Call: (9) parent(elizabeth, sophia) ? creep
+	   Exit: (9) parent(elizabeth, sophia) ? creep
+	   Exit: (8) ancestor(elizabeth, sophia) ? creep
+	   Exit: (7) ancestor(james1, sophia) ? creep
+	X = james1 ;
+	   Redo: (8) ancestor(elizabeth, sophia) ? creep
+	   Call: (9) parent(elizabeth, _G3703) ? creep
+	   Exit: (9) parent(elizabeth, sophia) ? creep
+	   Call: (9) ancestor(sophia, sophia) ? creep
+	   Call: (10) parent(sophia, sophia) ? creep
+	   Fail: (10) parent(sophia, sophia) ? creep
+	   Redo: (9) ancestor(sophia, sophia) ? creep
+	   Call: (10) parent(sophia, _G3703) ? creep
+	   Exit: (10) parent(sophia, george1) ? creep
+	   Call: (10) ancestor(george1, sophia) ? creep
+	   Call: (11) parent(george1, sophia) ? creep
+	   Fail: (11) parent(george1, sophia) ? creep
+	   Redo: (10) ancestor(george1, sophia) ? creep
+	   Call: (11) parent(george1, _G3703) ? creep
+	   Fail: (11) parent(george1, _G3703) ? creep
+	   Fail: (10) ancestor(george1, sophia) ? creep
+	   Fail: (9) ancestor(sophia, sophia) ? creep
+	   Fail: (8) ancestor(elizabeth, sophia) ? creep
+	   Redo: (8) parent(_G3626, _G3703) ? creep
+	   Exit: (8) parent(charles1, charles2) ? creep
+	   Call: (8) ancestor(charles2, sophia) ? creep
+	   Call: (9) parent(charles2, sophia) ? creep
+	   Fail: (9) parent(charles2, sophia) ? creep
+	   Redo: (8) ancestor(charles2, sophia) ? creep
+	   Call: (9) parent(charles2, _G3703) ? creep
+	   Fail: (9) parent(charles2, _G3703) ? creep
+	   Fail: (8) ancestor(charles2, sophia) ? creep
+	   Redo: (8) parent(_G3626, _G3703) ? creep
+	   Exit: (8) parent(charles1, catherine) ? creep
+	   Call: (8) ancestor(catherine, sophia) ? creep
+	   Call: (9) parent(catherine, sophia) ? creep
+	   Fail: (9) parent(catherine, sophia) ? creep
+	   Redo: (8) ancestor(catherine, sophia) ? creep
+	   Call: (9) parent(catherine, _G3703) ? creep
+	   Fail: (9) parent(catherine, _G3703) ? creep
+	   Fail: (8) ancestor(catherine, sophia) ? creep
+	   Redo: (8) parent(_G3626, _G3703) ? creep
+	   Exit: (8) parent(charles1, james2) ? creep
+	   Call: (8) ancestor(james2, sophia) ? creep
+	   Call: (9) parent(james2, sophia) ? creep
+	   Fail: (9) parent(james2, sophia) ? creep
+	   Redo: (8) ancestor(james2, sophia) ? creep
+	   Call: (9) parent(james2, _G3703) ? creep
+	   Fail: (9) parent(james2, _G3703) ? creep
+	   Fail: (8) ancestor(james2, sophia) ? creep
+	   Redo: (8) parent(_G3626, _G3703) ? creep
+	   Exit: (8) parent(elizabeth, sophia) ? creep
+	   Call: (8) ancestor(sophia, sophia) ? creep
+	   Call: (9) parent(sophia, sophia) ? creep
+	   Fail: (9) parent(sophia, sophia) ? creep
+	   Redo: (8) ancestor(sophia, sophia) ? creep
+	   Call: (9) parent(sophia, _G3703) ? creep
+	   Exit: (9) parent(sophia, george1) ? creep
+	   Call: (9) ancestor(george1, sophia) ? creep
+	   Call: (10) parent(george1, sophia) ? creep
+	   Fail: (10) parent(george1, sophia) ? creep
+	   Redo: (9) ancestor(george1, sophia) ? creep
+	   Call: (10) parent(george1, _G3703) ? creep
+	   Fail: (10) parent(george1, _G3703) ? creep
+	   Fail: (9) ancestor(george1, sophia) ? creep
+	   Fail: (8) ancestor(sophia, sophia) ? creep
+	   Redo: (8) parent(_G3626, _G3703) ? creep
+	   Exit: (8) parent(sophia, george1) ? creep
+	   Call: (8) ancestor(george1, sophia) ? creep
+	   Call: (9) parent(george1, sophia) ? creep
+	   Fail: (9) parent(george1, sophia) ? creep
+	   Redo: (8) ancestor(george1, sophia) ? creep
+	   Call: (9) parent(george1, _G3703) ? creep
+	   Fail: (9) parent(george1, _G3703) ? creep
+	   Fail: (8) ancestor(george1, sophia) ? creep
+	   Fail: (7) ancestor(_G3626, sophia) ? creep
+	false.
+
+	It basically goes through every call to every function
+
+	3. 
+	?- ancestor(X, sophia).
+	X = elizabeth ;
+	X = james1 ;
+	ERROR: Out of local stack
+
+	We ran out of stack space.
+
+	4.  The new code checks every ancestor of Y and checks whether each ancestor is a child of X. This is much less efficient than the old code and uses up a lot more function calls.
