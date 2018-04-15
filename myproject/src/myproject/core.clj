@@ -1,4 +1,3 @@
-[cascalog/cascalog-core "3.0.0"]
 (ns myproject.core)
 
 (defn foo
