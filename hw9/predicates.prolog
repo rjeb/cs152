@@ -1,13 +1,15 @@
-last(E, L) :- .
+last(E, [_|T]) :- last(E, T).
+last(E, [H]) :- E == H.
+last(_, []) :- false.
 
-notlast(S, L) :- .
+%notlast(S, L) :- .
 
-subseq(S, L) :- .
+%subseq(S, L) :- .
 
-sublist(S, L) :- .
+%sublist(S, L) :- .
 
-without(L, E, S) :- .
+%without(L, E, S) :- .
 
-permutation(L, M) :- .
+%permutation(L, M) :- .
 
-split(L,P,Q) :- .
+%split(L,P,Q) :- .
