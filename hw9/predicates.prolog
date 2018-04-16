@@ -12,9 +12,6 @@ notfirst(T, [_|T]).
 %tail([_|[T]], [T]).
 %test([T], [_, [T]]).
 
-contains([H], [H|_]).
-contains([H], [_|T2]) :- contains([H], T2).
-
 subseqcheck([], _).
 subseqcheck([H1|T1], [H1| T2]) :- subseqcheck(T1, T2).
 
@@ -39,9 +36,13 @@ append([X|Y], Z, [X|W]) :- append(Y, Z, W).
 withouthelper([], _, []).
 withouthelper(L, _, L) :- dif([], L).
 
-without([R|T1], R, T2) :- withouthelper(T1, R, T2).
+without([R|T1], R, T1) :- withouthelper(T1, R, T1).
 without([H1|T1], R, [H1|T2]) :- without(T1, R, T2), dif(R, H1).
 
-%permutation(L, M) :- .
+contains(H, [H|_]).
+contains(H, [_|T2]) :- contains(H, T2).
+
+permutation([H1|T1], L) :- permutation(T1, X), without(L, H1, X).
+permutation([], []).
 
 split(L,P,Q) :- append(P,Q,L).
