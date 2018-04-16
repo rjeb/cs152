@@ -26,13 +26,15 @@ sublist([], _).
 sublist([H|T1], [H|T2]) :- subseq(T1, T2).
 sublist([H1|T1], [_|T2]) :- subseq([H1|T1], T2).
 
-
-%append([], X, X).
-%append([X|Y], Z, [X|W]) :- append (Y, Z, W).
+append([], X, X).
+append([X|Y], Z, [X|W]) :- append(Y, Z, W).
 
 
 %without(L, E, S) :- .
+without([], R,  _).
+without([H|T1], R, [H|T2]) :- subseq(T1, T2), subseqcheck(T1, T2).
+without([H1|T1], R, [_|T2]) :- subseq([H1|T1], T2).
 
 %permutation(L, M) :- .
 
-%split(L,P,Q) :- .
+split(L,P,Q) :- append(P,Q,L).
