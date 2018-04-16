@@ -11,9 +11,10 @@ Step 2.
 2. 
 win([o,o,o,o,o,o,o,o,o,o]).
 win([o,o,o,o,o,o,o,o,o]).
-win([o,o,o,o,o,o,o]).
+win([o,o,o,o,o,o,o,o]).
 win([o,o,o,o,o,o]).
 win([o,o,o,o,o]).
-win([o,o,o]).
+win([o,o,o,o]).
+win([o,o]).
 
 
