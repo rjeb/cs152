@@ -7,17 +7,15 @@ notlast([], []) :- false.
 notlast([_], []) :- false.
 notlast([H|T1], [H|T2]) :- notlast(T1, T2).
 
-tail([_|[T]], [T]).
-test([T], [_, [T]]).
+%tail([_|[T]], [T]).
+%test([T], [_, [T]]).
 
-%contains([H],[H]).
-contains([H], [H|T]).
-contains([H], [_|T]) :- contains([H], T).
-%contains([H1|[T1]],[H2|[T2]]) :- contains([H1], [H2|T2]), contains([T1], [H2|T2]).
+contains([H], [H|_]).
+contains([H], [_|T2]) :- contains([H], T2).
 
-subseq([], []).
-subseq([H], [H]).
-subseq([H], [R]) :- contains([H], [R]).
+subseq([], _).
+subseq([H|T1], [H|T2]) :- subseq(T1, T2).
+subseq([H1|T1], [_|T2]) :- subseq([H1|T1], T2).
 %subseq([H1|[T1]], [H2, [T2]])
 
 
