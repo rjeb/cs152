@@ -1,0 +1,19 @@
+Names: Jason Thai 010954385, Vincent Diep 007329959
+Lab 18 CS 152
+4/16 Lecture 19
+
+Professor said to skip Step 1.
+
+Step 2. 
+
+1. move(From, To) :- append(To, [o|_], From), append(To, To, X), append(From, [o|_], X).
+
+2. 
+win([o,o,o,o,o,o,o,o,o,o]).
+win([o,o,o,o,o,o,o,o,o]).
+win([o,o,o,o,o,o,o]).
+win([o,o,o,o,o,o]).
+win([o,o,o,o,o]).
+win([o,o,o]).
+
+
