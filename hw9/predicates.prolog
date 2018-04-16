@@ -31,9 +31,9 @@ append([X|Y], Z, [X|W]) :- append(Y, Z, W).
 
 
 %without(L, E, S) :- .
-without([], R,  _).
-without([H|T1], R, [H|T2]) :- subseq(T1, T2), subseqcheck(T1, T2).
-without([H1|T1], R, [_|T2]) :- subseq([H1|T1], T2).
+without([], _, []).
+without([R|T1], R, L) :- without(T1, R, L).
+without([H1|T1], R, [H1|T2]) :- without(T1, R, T2), dif(R, H1).
 
 %permutation(L, M) :- .
 
