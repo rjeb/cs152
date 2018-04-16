@@ -31,8 +31,15 @@ append([X|Y], Z, [X|W]) :- append(Y, Z, W).
 
 
 %without(L, E, S) :- .
-without([], _, []).
-without([R|T1], R, L) :- without(T1, R, L).
+%below implements without taking out ALL INSTANCES of target element
+%without([], _, []).
+%without([R|T1], R, L) :- without(T1, R, L).
+%without([H1|T1], R, [H1|T2]) :- without(T1, R, T2), dif(R, H1).
+
+withouthelper([], _, []).
+withouthelper(L, _, L) :- dif([], L).
+
+without([R|T1], R, T2) :- withouthelper(T1, R, T2).
 without([H1|T1], R, [H1|T2]) :- without(T1, R, T2), dif(R, H1).
 
 %permutation(L, M) :- .
