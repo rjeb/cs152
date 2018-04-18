@@ -1,0 +1,30 @@
+Lab 19
+Names: Jason Thai 010954385, Vincent Diep 007329959
+
+member(X, cons(john, cons(mary, nil)))
+= member(X17, cons(X17, T))
+
+- - - - - -  -
+X = X17.
+cons(john, cons(mary, nil)) = cons(X17, T)
+- - - - - - - - - - - - - - - -
+X17 = X
+cons(john, cons(mary, nil)) = cons(X17, T)
+- - - - - - - - - - - - - - -
+cons(john, cons(mary, nil)) = cons(X, T)
+- - - - - - - -
+
+X = john
+T = cons(mary, nil)
+
+2.
+
+member(X, cons(john, cons(mary, nil))) = member(X17, cons(X17, T))
+
+X = john
+T = cons(mary, nil)
+
+3. 
+
+member(john, cons(mary, nil))
+

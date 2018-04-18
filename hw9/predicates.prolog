@@ -45,4 +45,4 @@ contains(H, [_|T2]) :- contains(H, T2).
 permutation([H1|T1], L) :- permutation(T1, X), without(L, H1, X).
 permutation([], []).
 
-split(L,P,Q) :- append(P,Q,L).
+split(L,P,Q) :- append(P,Q,X), permutation(X, L), sublist(P, L), sublist(Q, L).
