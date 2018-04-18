@@ -20,8 +20,8 @@ subseq([H|T1], [H|T2]) :- subseq(T1, T2), subseqcheck(T1, T2).
 subseq([H1|T1], [_|T2]) :- subseq([H1|T1], T2).
 
 sublist([], _).
-sublist([H|T1], [H|T2]) :- subseq(T1, T2).
-sublist([H1|T1], [_|T2]) :- subseq([H1|T1], T2).
+sublist([H|T1], [H|T2]) :- sublist(T1, T2).
+sublist([H1|T1], [_|T2]) :- sublist([H1|T1], T2).
 
 append([], X, X).
 append([X|Y], Z, [X|W]) :- append(Y, Z, W).
@@ -42,7 +42,8 @@ without([H1|T1], R, [H1|T2]) :- without(T1, R, T2), dif(R, H1).
 contains(H, [H|_]).
 contains(H, [_|T2]) :- contains(H, T2).
 
-permutation([H1|T1], L) :- permutation(T1, X), without(L, H1, X).
-permutation([], []).
+%permutation([H1|T1], L) :- permutation(T1, X), without(L, H1, X).
+%permutation([], []).
 
-split(L,P,Q) :- append(P,Q,X), permutation(X, L), sublist(P, L), sublist(Q, L).
+
+split(L,P,Q) :- permutation(X1, L), sublist(P, L), sublist(Q, L), append(Q, P, X1).
