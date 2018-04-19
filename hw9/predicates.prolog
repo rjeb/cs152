@@ -42,8 +42,9 @@ without([H1|T1], R, [H1|T2]) :- without(T1, R, T2), dif(R, H1).
 contains(H, [H|_]).
 contains(H, [_|T2]) :- contains(H, T2).
 
-%permutation([H1|T1], L) :- permutation(T1, X), without(L, H1, X).
-%permutation([], []).
+permutation([H1|T1], L) :- permutation(T1, X), without(L, H1, X).
+permutation([], []).
 
+  
 
-split(L,P,Q) :- permutation(X1, L), sublist(P, L), sublist(Q, L), append(Q, P, X1).
+split(L,P,Q) :- permutation(L, X1), sublist(P, L), sublist(Q, L), append(Q, P, X1).
