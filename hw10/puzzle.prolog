@@ -13,6 +13,8 @@ flipped(Click, Columns, [Click]) :- Columns = 1.
 % Cells (list of positions) in a Row (list of red positions)
 % of the given number of columns.
 
+doFlips(Cells, Row, Colummns, Result) :- .
+
 % allFlips(Flips, Row, Rows, Columns, AllFlips)
 % yields in AllFlips a list of lists for flips for each row so that the
 % initial set of Flips in the initial Row turns the rectangle
