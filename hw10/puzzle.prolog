@@ -33,13 +33,13 @@ calcFlip([H|T], COL, RES) :- flipped(H, COL, RES1), calcFlip(T,COL,RES2), xorLis
 % initial set of Flips in the initial Row turns the rectangle
 % of the given rows and columns all red.
 
-%allFlips(Flips, Row, Rows, Columns, [Flips | MoreFlips]) :-
-%    Rows > 0,
-%    doFlips(...),
-%    numlist(1, Columns, All),
-%    ord_symdiff(...),
-%    Rows1 is Rows - 1,
-%    allFlips(...).
-%allFlips([], _, 0, _, []).
+allFlips(Flips, Row, Rows, Columns, [Flips | MoreFlips]) :-
+    Rows > 0,
+    doFlips(Flips, Row, Columns, RES1),
+    numlist(1, Columns, All),
+    ord_symdiff(All, RES1, ROW1),
+    Rows1 is Rows - 1,
+   allFlips(ROW1, Flips,Rows1, Columns, MoreFlips).
+allFlips([], _, 0, _, []).
 
 solution(Rows, Columns, Solution) :- numlist(1, Columns, L), sublist(Solution, L), allFlips(Solution, [], Rows, Columns, _).
