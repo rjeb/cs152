@@ -23,10 +23,10 @@ xorList(X, Y, ANS):- intersection(X,Y, TMP), subtract(X, TMP, X1), subtract(Y, T
 % Cells (list of positions) in a Row (list of red positions)
 % of the given number of columns.
 
-%doFlips([H|T], ROW, COL, RES) :- flipped(H, COL, RES).
+doFlips([H|T], ROW, COL, RES) :- calcFlip([H|T], COL, RES1), xorList(RES1, ROW, RES2), sort(RES2, RES).
 
-%calcFlip([], _, _).
-%calcFlip([H|T], COL, RES) :- flipped(H, COL, RES1), calcFlip(T,COL,RES2), xorList(RES1, RES2).
+calcFlip([], _, []).
+calcFlip([H|T], COL, RES) :- flipped(H, COL, RES1), calcFlip(T,COL,RES2), xorList(RES1, RES2, RES).
 
 % allFlips(Flips, Row, Rows, Columns, AllFlips)
 % yields in AllFlips a list of lists for flips for each row so that the
