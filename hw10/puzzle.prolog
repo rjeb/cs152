@@ -42,4 +42,8 @@ allFlips(Flips, Row, Rows, Columns, [Flips | MoreFlips]) :-
    allFlips(ROW1, Flips,Rows1, Columns, MoreFlips).
 allFlips([], _, 0, _, []).
 
+sublist([], _).
+sublist([H|T1], [H|T2]) :- sublist(T1, T2).
+sublist([H1|T1], [_|T2]) :- sublist([H1|T1], T2).
+
 solution(Rows, Columns, Solution) :- numlist(1, Columns, L), sublist(Solution, L), allFlips(Solution, [], Rows, Columns, _).
