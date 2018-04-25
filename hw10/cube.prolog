@@ -1,6 +1,15 @@
 
 %cycles([], []).
-%cycles([H|T], X) :- nth0(0, H, ELEM)), findFinal(H).
+cycles([H|T], X) :- cycleCreate(0, 0, [H|T], X).
+
+
+cycleCreate(_, B, [H|T], X) :- length([H|T], LEN), B =:= LEN, X = [].
+cycleCreate(A, B, [H|T], X) :- nth0(B, [H|T], CYCLEIN), length(CYCLEIN, LEN), A =:= LEN, A1 is 0, B1 is B + 1, cycleCreate(A1, B1, [H|T], X). 
+
+cycleCreate(INDEXNUM, INDEXLST, [H|T], X) :- nth0(INDEXLST, [H|T], CYCLEIN), nth0(INDEXNUM, CYCLEIN, NUM), cycles1(NUM, [H|T], CYCLEGEN), INCREMENT is INDEXNUM + 1, cycleCreate(INCREMENT, INDEXLST, [H|T], TMP), append([CYCLEGEN], TMP, X).
+
+normalize([H|T], [H|T]) :- min_member(H, [H|T]).
+normalize([H|T], ANSW) :- not(min_member(H, [H|T])), last([H|T], LAST), delete([H|T], LAST, LST), append([LAST], LST, LST1), normalize(LST1, ANSW).
 
 cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [H|T], ELEM)), cycles2(ELEM, MATCH, [H|T], MATCH1), append([ELEM], MATCH1, X).
 %simple cycles of length 2
