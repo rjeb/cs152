@@ -87,11 +87,9 @@ public class Test {
 3. bipush 42
 
 Step 3.
-int meth(a, b){
-	if (b != 8){
-		return b;
-	}
-	else{
-		b - b	
-	}
+if(b == 0){
+	return 1;
+}
+else{
+	a * mystery(a, b-1);
 }
