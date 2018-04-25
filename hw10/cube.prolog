@@ -7,6 +7,7 @@ cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [
 cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), ELEM<MATCH, X = [ELEM, MATCH].
 cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), ELEM>MATCH, X = [MATCH, ELEM].
 
+cycles2(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [H|T], SEARCH)), cycles2(SEARCH, MATCH, [H|T], MATCH1), append([ELEM], MATCH1, X).
 cycles2(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], SEARCH), X = [ELEM, MATCH].
 
 findFinal(ELEM, [], ELEM).
