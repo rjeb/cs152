@@ -21,3 +21,77 @@ public class Test {
 }
 
 3.
+
+Changed it to the following: 
+
+public class Test
+{
+   public static void main(String[] args)
+   {
+	int r;
+	int a = 3;
+	int b = 4;
+	int c = 5;
+	r = a + b * 5;
+   }
+}
+
+4. 
+Compiled from "Test.java"
+public class Test {
+  public Test();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: iconst_3
+       1: istore_2
+       2: iconst_4
+       3: istore_3
+       4: iconst_5
+       5: istore        4
+       7: iload_2
+       8: iload_3
+       9: iconst_5
+      10: imul
+      11: iadd
+      12: istore_1
+      13: return
+}
+
+Step 2. 
+
+1. 
+Compiled from "Test.java"
+public class Test {
+  public Test();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       3: bipush        42
+       5: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V
+       8: return
+}
+
+2. 
+(I)V
+
+3. bipush 42
+
+Step 3.
+int meth(a, b){
+	if (b != 8){
+		return b;
+	}
+	else{
+		b - b	
+	}
+}
