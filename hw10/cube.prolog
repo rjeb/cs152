@@ -1,8 +1,33 @@
 
-%cycles(1, 2).
+%cycles([], []).
+%cycles([H|T], X) :- nth0(0, H, ELEM)), findFinal(H).
+
+cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [H|T], ELEM)), cycles2(ELEM, MATCH, [H|T], MATCH1), append([ELEM], MATCH1, X).
+%simple cycles of length 2
+cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), ELEM<MATCH, X = [ELEM, MATCH].
+cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), ELEM>MATCH, X = [MATCH, ELEM].
+
+cycles2(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], SEARCH), X = [ELEM, MATCH].
+
+findFinal(ELEM, [], ELEM).
+findFinal(ELEM, [H|T], X) :- findMatch(ELEM, MATCH1, H), findFinal(MATCH1, T, X).
+
+%test case : findFinal(0, [[0, 3, 5], [0, 6, 3]], X).
+%test case ; findFinal(0, [[0, 3,5], [0,6,3]], X).
+
 
 % applyCycle(Cycle, A, B)
 % The given cycle sends A to B
+findMatch(ELEM, MATCH, LST) :-not(nth1(_, LST, ELEM)), MATCH = ELEM.
+findMatch(ELEM, MATCH, LST) :- length(LST, LEN), nth1(INDEX, LST, ELEM), INDEX < LEN, nextto(ELEM, MATCH, LST).
+findMatch(ELEM, MATCH, [MATCH|T]) :- length([MATCH|T], LEN), nth1(INDEX, [MATCH|T], ELEM), INDEX = LEN.
+
+%replace([_|T], 0, X, [X|T]).
+%replace([H|T], I, X, [H|R]):- I > -1, NI is I-1, replace(T, NI, X, R), !.
+%replace(L, _, _, L).
+
+%applyCycle([], A, A).
+%applyCycle([H|T], [A], [B]):- nth0(H, A, ELEM), replace(A, H, ELEM, LST).
 
 % applyPerm(Cycles, A, B)
 % The given permutation (list of cycles) sends A to B
