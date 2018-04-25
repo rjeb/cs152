@@ -1,0 +1,23 @@
+Lab 21
+4/25
+Jason Thai: 010954385 & Vincent Diep: 007329959
+
+Step 1. 
+
+2. 
+Compiled from "Test.java"
+public class Test {
+  public Test();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: bipush        23
+       2: istore_1
+       3: return
+}
+
+3.
