@@ -1,9 +1,12 @@
 cycles([H|T], X) :- cycleCreate(0, 0, [H|T], TMP), sort(0, @<, TMP, X).
 
+%Test Case: cycles([[0,3,5],[0,6,3],[0,5,3],[0,3,6]], X).
+
+
 cycleCreate(_, B, [H|T], X) :- length([H|T], LEN), B =:= LEN, X = [].
 cycleCreate(A, B, [H|T], X) :- nth0(B, [H|T], CYCLEIN), length(CYCLEIN, LEN), A =:= LEN, A1 is 0, B1 is B + 1, cycleCreate(A1, B1, [H|T], X). 
 
-cycleCreate(INDEXNUM, INDEXLST, [H|T], X) :- nth0(INDEXLST, [H|T], CYCLEIN), nth0(INDEXNUM, CYCLEIN, NUM), cycles1(NUM, [H|T], CYCLEGEN), INCREMENT is INDEXNUM + 1, cycleCreate(INCREMENT, INDEXLST, [H|T], TMP), normalize(CYCLEGEN, CYCLEGEN2), not(member(CYCLEGEN2, TMP)), append([CYCLEGEN], TMP, X).
+cycleCreate(INDEXNUM, INDEXLST, [H|T], X) :- nth0(INDEXLST, [H|T], CYCLEIN), nth0(INDEXNUM, CYCLEIN, NUM), cycles1(NUM, [H|T], CYCLEGEN), INCREMENT is INDEXNUM + 1, cycleCreate(INCREMENT, INDEXLST, [H|T], TMP), normalize(CYCLEGEN, CYCLEGEN2), not(member(CYCLEGEN2, TMP)), append([CYCLEGEN2], TMP, X).
 
 cycleCreate(INDEXNUM, INDEXLST, [H|T], X) :- nth0(INDEXLST, [H|T], CYCLEIN), nth0(INDEXNUM, CYCLEIN, NUM), cycles1(NUM, [H|T], CYCLEGEN), INCREMENT is INDEXNUM + 1, cycleCreate(INCREMENT, INDEXLST, [H|T], TMP), normalize(CYCLEGEN, CYCLEGEN2), member(CYCLEGEN2, TMP), X = TMP.
 
@@ -35,11 +38,17 @@ findMatch(ELEM, MATCH, [MATCH|T]) :- length([MATCH|T], LEN), nth1(INDEX, [MATCH|
 %replace([H|T], I, X, [H|R]):- I > -1, NI is I-1, replace(T, NI, X, R), !.
 %replace(L, _, _, L).
 
+%CREATED PREDICATES WITH DIFFERENT NAMES/FUNCTIONALITY FOR CYCLES BUT IMPLEMENTED SOME OF THE PREDICATES BELOW
+
 %applyCycle([], A, A).
 %applyCycle([H|T], [A], [B]):- nth0(H, A, ELEM), replace(A, H, ELEM, LST).
 
+applyCycle(LST, IN, OUT) :- findMatch(IN, OUT, LST).
+
 % applyPerm(Cycles, A, B)
 % The given permutation (list of cycles) sends A to B
+
+applyPerm(LST, IN, OUT) :- findFinal(IN, LST, OUT).
 
 % orbit(Perm, A, Orbit)
 % Repeatedly applying Perm to A sends A to all elements in Orbit
