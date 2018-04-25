@@ -1,9 +1,9 @@
+cycles([], []).
 cycles([H|T], X) :- cycleCreate(0, 0, [H|T], TMP), sort(0, @<, TMP, X).
 
 %Test Case: cycles([[0,3,5],[0,6,3],[0,5,3],[0,3,6]], X).
 
-
-cycleCreate(_, B, [H|T], X) :- length([H|T], LEN), B =:= LEN, X = [].
+cycleCreate(_, B, [H|T], X) :- length([H|T], LEN), B >= LEN, X = [].
 cycleCreate(A, B, [H|T], X) :- nth0(B, [H|T], CYCLEIN), length(CYCLEIN, LEN), A =:= LEN, A1 is 0, B1 is B + 1, cycleCreate(A1, B1, [H|T], X). 
 
 cycleCreate(INDEXNUM, INDEXLST, [H|T], X) :- nth0(INDEXLST, [H|T], CYCLEIN), nth0(INDEXNUM, CYCLEIN, NUM), cycles1(NUM, [H|T], CYCLEGEN), INCREMENT is INDEXNUM + 1, cycleCreate(INCREMENT, INDEXLST, [H|T], TMP), normalize(CYCLEGEN, CYCLEGEN2), not(member(CYCLEGEN2, TMP)), append([CYCLEGEN2], TMP, X).
@@ -15,8 +15,8 @@ normalize([H|T], ANSW) :- not(min_member(H, [H|T])), last([H|T], LAST), delete([
 
 cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [H|T], ELEM)), cycles2(ELEM, MATCH, [H|T], MATCH1), append([ELEM], MATCH1, X).
 %simple cycles of length 2
-cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), ELEM<MATCH, X = [ELEM, MATCH].
-cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), ELEM>MATCH, X = [MATCH, ELEM].
+cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), compare(<, ELEM, MATCH), X = [ELEM, MATCH].
+cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), compare(>, ELEM, MATCH), X = [MATCH, ELEM].
 
 cycles2(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [H|T], SEARCH)), cycles2(SEARCH, MATCH, [H|T], MATCH1), append([ELEM], MATCH1, X).
 cycles2(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], SEARCH), X = [ELEM, MATCH].
@@ -52,6 +52,8 @@ applyPerm(LST, IN, OUT) :- findFinal(IN, LST, OUT).
 
 % orbit(Perm, A, Orbit)
 % Repeatedly applying Perm to A sends A to all elements in Orbit
+
+orbit(Perm, A, Orbit) :- cycles1(A, Perm, Orbit).
 
 rotation(r0, [1, 4, 2], [d, l, f]).
 rotation(r1, [0, 3, 5], [d, f, r]).
