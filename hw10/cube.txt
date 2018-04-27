@@ -1,0 +1,47 @@
+Jason Thai
+CS152
+HW10
+
+ANSWERS: 
+
+[b, d, f]: [r0, r4, r1, r4, r0, r1, r0] 
+[b, d, r]:  [r0, r0, r3, r5, r3, r0, r6]
+[b, d, u]: [r0, r4, r4, r6, r0, r6, r4] 
+[b, d, l]: [r0, r4, r2, r4, r0, r0, r2]
+
+BELOW IS THE QUERY FOR [b, d, f].
+
+?- findall(X, rotation(_, X, _), VertexRotations), find(VertexRotations, [], S,  7), convertPtoS(S, LST), cycles(LST, [[b, d, f]]), convertStoName(LST, ROTATIONS).
+VertexRotations = [[1, 4, 2], [0, 3, 5], [0, 6, 3], [1, 2, 7], [0, 6, 5], [1, 4, 7], [2, 7|...], [3|...]],
+S = [[1, 4, 2], [0, 6, 5], [0, 3, 5], [0, 6, 5], [1, 4, 2], [0, 3, 5], [1, 4|...]],
+LST = [[d, l, f], [b, d, l], [d, f, r], [b, d, l], [d, l, f], [d, f, r], [d, l|...]],
+ROTATIONS = [r0, r4, r1, r4, r0, r1, r0] .
+
+
+BELOW IS THE QUERY FOR [b, d, r].
+
+?- findall(X, rotation(_, X, _), VertexRotations), find(VertexRotations, [], S,  7), convertPtoS(S, LST), cycles(LST, [[b, d, r]]), convertStoName(LST, ROTATIONS).
+VertexRotations = [[1, 4, 2], [0, 3, 5], [0, 6, 3], [1, 2, 7], [0, 6, 5], [1, 4, 7], [2, 7|...], [3|...]],
+S = [[1, 4, 2], [1, 4, 2], [1, 2, 7], [1, 4, 7], [1, 2, 7], [1, 4, 2], [2, 7|...]],
+LST = [[d, l, f], [d, l, f], [f, u, r], [b, r, d], [f, u, r], [d, l, f], [b, l|...]],
+ROTATIONS = [r0, r0, r3, r5, r3, r0, r6] .
+
+BELOW IS THE QUERY FOR [b, d, u].
+
+?- findall(X, rotation(_, X, _), VertexRotations), find(VertexRotations, [], S,  7), convertPtoS(S, LST), cycles(LST, [[b, d, u]]), convertStoName(LST, ROTATIONS).
+VertexRotations = [[1, 4, 2], [0, 3, 5], [0, 6, 3], [1, 2, 7], [0, 6, 5], [1, 4, 7], [2, 7|...], [3|...]],
+S = [[1, 4, 2], [0, 6, 5], [0, 6, 5], [2, 7, 4], [1, 4, 2], [2, 7, 4], [0, 6|...]],
+LST = [[d, l, f], [b, d, l], [b, d, l], [b, l, u], [d, l, f], [b, l, u], [b, d|...]],
+ROTATIONS = [r0, r4, r4, r6, r0, r6, r4] .
+
+
+BELOW IS THE QUERY FOR [b, d, l].
+
+?- findall(X, rotation(_, X, _), VertexRotations), find(VertexRotations, [], S,  7), convertPtoS(S, LST), cycles(LST, [[b, d, l]]), convertStoName(LST, ROTATIONS).
+VertexRotations = [[1, 4, 2], [0, 3, 5], [0, 6, 3], [1, 2, 7], [0, 6, 5], [1, 4, 7], [2, 7|...], [3|...]],
+S = [[1, 4, 2], [0, 6, 5], [0, 6, 3], [0, 6, 5], [1, 4, 2], [1, 4, 2], [0, 6|...]],
+LST = [[d, l, f], [b, d, l], [f, l, u], [b, d, l], [d, l, f], [d, l, f], [f, l|...]],
+ROTATIONS = [r0, r4, r2, r4, r0, r0, r2] .
+
+
+

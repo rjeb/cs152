@@ -1,46 +1,48 @@
-%cycles([], [[]]).
-%cycles([H|T], X) :- not(cycles0([H|T], X)), X = [[]].
-%cycles([H|T], X) :- cycles0([H|T], X).
 
-cycles([H|T], X) :- cycleCreate(0, 0, [H|T], TMP), sort(0, @<, TMP, TMP2), removeCycles(TMP2, X).
+%using first implementation of cycleCreate (flattens a list and creates cycles from those lists)
+cycles([H|T], X) :- flatten([H|T], ELEMENTS), cycleCreate(ELEMENTS, [H|T], TMP), sort(0, @<, TMP, TMP2), removeCycles(TMP2, X).
 
-removeCycles([H|T], X) :- removeCycles1([H|T], TMP), X = TMP.
+%using second(old) implementation of cycleCreate (generates a cycle from every element from every cycle and then removes duplicate cycles)
+%cycles([H|T], X) :- cycleCreate(0, 0, [H|T], TMP), sort(0, @<, TMP, TMP2), removeCycles(TMP2, X).
 
-removeCycles1([], []).
-removeCycles1([H|T], X) :- checkCycle(H), removeCycles1(T, TMP), X = TMP. 
-removeCycles1([H|T], X) :- not(checkCycle(H)), removeCycles1(T, TMPLST), append(H, TMPLST, X). 
+removeCycles([H|T], X) :- removeCycles1([H|T], TMP), X = TMP, !.
 
-checkCycle([H|T]) :- delete([H|T], H, TMPLST), TMPLST = [].
+removeCycles1([], []) :- !.
+removeCycles1([H|T], X) :- checkCycle(H), removeCycles1(T, TMP), X = TMP, !. 
+removeCycles1([H|T], X) :- not(checkCycle(H)), removeCycles1(T, TMPLST), append([H], TMPLST, X), !. 
+
+checkCycle([H|T]) :- delete([H|T], H, TMPLST), TMPLST = [], !.
 
 %Test Case: cycles([[0,3,5],[0,6,3],[0,5,3],[0,3,6]], X).
 
-cycleCreate(_, B, [H|T], X) :- length([H|T], LEN), B >= LEN, X = [].
-cycleCreate(A, B, [H|T], X) :- nth0(B, [H|T], CYCLEIN), length(CYCLEIN, LEN), A =:= LEN, A1 is 0, B1 is B + 1, cycleCreate(A1, B1, [H|T], X). 
 
-cycleCreate(INDEXNUM, INDEXLST, [H|T], X) :- nth0(INDEXLST, [H|T], CYCLEIN), nth0(INDEXNUM, CYCLEIN, NUM), cycles1(NUM, [H|T], CYCLEGEN), INCREMENT is INDEXNUM + 1, cycleCreate(INCREMENT, INDEXLST, [H|T], TMP), normalize(CYCLEGEN, CYCLEGEN2), not(member(CYCLEGEN2, TMP)), append([CYCLEGEN2], TMP, X).
+%first implementation
+cycleCreate([], _, []) :- !.
+cycleCreate([H1|T1], [H|T], X) :- cycles1(H1, [H|T], TMP), normalize(TMP, TMP2), cycleCreate(T1, [H|T], GENLST), member(TMP2, GENLST), X = GENLST, !.
+cycleCreate([H1|T1], [H|T], X) :- cycles1(H1, [H|T], TMP), normalize(TMP, TMP2), cycleCreate(T1, [H|T], GENLST), not(member(TMP2, GENLST)), append([TMP2], GENLST, X), !.
 
-cycleCreate(INDEXNUM, INDEXLST, [H|T], X) :- nth0(INDEXLST, [H|T], CYCLEIN), nth0(INDEXNUM, CYCLEIN, NUM), cycles1(NUM, [H|T], CYCLEGEN), INCREMENT is INDEXNUM + 1, cycleCreate(INCREMENT, INDEXLST, [H|T], TMP), normalize(CYCLEGEN, CYCLEGEN2), member(CYCLEGEN2, TMP), X = TMP.
+%OLD IMPLEMENTATION OF CYCLE CREATE. MUCH SLOWER AS IT CREATES CYCLES FOR ALL ELEMENTS AND REMOVES DUPLICATES
+%cycleCreate(_, B, [H|T], X) :- length([H|T], LEN), B >= LEN, X = [].
+%cycleCreate(A, B, [H|T], X) :- nth0(B, [H|T], CYCLEIN), length(CYCLEIN, LEN), A =:= LEN, A1 is 0, B1 is B + 1, cycleCreate(A1, B1, [H|T], X). 
+
+%cycleCreate(INDEXNUM, INDEXLST, [H|T], X) :- nth0(INDEXLST, [H|T], CYCLEIN), nth0(INDEXNUM, CYCLEIN, NUM), cycles1(NUM, [H|T], CYCLEGEN), INCREMENT is INDEXNUM + 1, cycleCreate(INCREMENT, INDEXLST, [H|T], TMP), normalize(CYCLEGEN, CYCLEGEN2), not(member(CYCLEGEN2, TMP)), append([CYCLEGEN2], TMP, X).
+
+%cycleCreate(INDEXNUM, INDEXLST, [H|T], X) :- nth0(INDEXLST, [H|T], CYCLEIN), nth0(INDEXNUM, CYCLEIN, NUM), cycles1(NUM, [H|T], CYCLEGEN), INCREMENT is INDEXNUM + 1, cycleCreate(INCREMENT, INDEXLST, [H|T], TMP), normalize(CYCLEGEN, CYCLEGEN2), member(CYCLEGEN2, TMP), X = TMP.
 
 normalize([H|T], [H|T]) :- min_member(H, [H|T]).
 normalize([H|T], ANSW) :- not(min_member(H, [H|T])), last([H|T], LAST), delete([H|T], LAST, LST), append([LAST], LST, LST1), normalize(LST1, ANSW).
 
-findcycle(ELEM, [H|T], X) :-findcycle1(ELEM, ELEM, [H|T], X).
-
-findcycle1(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], SEARCH), X = [[]].
-findcycle1(SEARCH, ELEM, [H|T], X) :- not(findFinal(ELEM, [H|T], SEARCH)), findFinal(ELEM, [H|T], TMP), findcycle1(SEARCH,TMP,[H|T],TMP2), append(TMP, TMP2, X).
-
-
-cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [H|T], ELEM)), cycles2(ELEM, MATCH, [H|T], MATCH1), append([ELEM], MATCH1, X).
+cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [H|T], ELEM)), cycles2(ELEM, MATCH, [H|T], MATCH1), append([ELEM], MATCH1, X), !.
 %simple cycles of length 2
-cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), compare(<, ELEM, MATCH), X = [ELEM, MATCH].
-cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), compare(=, ELEM, MATCH), X = [ELEM, MATCH].
-cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), compare(>, ELEM, MATCH), X = [MATCH, ELEM].
+cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), compare(<, ELEM, MATCH), X = [ELEM, MATCH], !.
+cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), compare(=, ELEM, MATCH), X = [ELEM, MATCH], !.
+cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), compare(>, ELEM, MATCH), X = [MATCH, ELEM], !.
 
-cycles2(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [H|T], SEARCH)), cycles2(SEARCH, MATCH, [H|T], MATCH1), append([ELEM], MATCH1, X).
-cycles2(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], SEARCH), X = [ELEM, MATCH].
+cycles2(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [H|T], SEARCH)), cycles2(SEARCH, MATCH, [H|T], MATCH1), append([ELEM], MATCH1, X), !.
+cycles2(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], SEARCH), X = [ELEM, MATCH], !.
 
-findFinal(ELEM, [], ELEM).
-findFinal(ELEM, [H|T], X) :- findMatch(ELEM, MATCH1, H), findFinal(MATCH1, T, X).
+findFinal(ELEM, [], ELEM) :- !.
+findFinal(ELEM, [H|T], X) :- findMatch(ELEM, MATCH1, H), findFinal(MATCH1, T, X), !.
 
 %test case : findFinal(0, [[0, 3, 5], [0, 6, 3]], X).
 %test case ; findFinal(0, [[0, 3,5], [0,6,3]], X).
@@ -48,9 +50,9 @@ findFinal(ELEM, [H|T], X) :- findMatch(ELEM, MATCH1, H), findFinal(MATCH1, T, X)
 
 % applyCycle(Cycle, A, B)
 % The given cycle sends A to B
-findMatch(ELEM, MATCH, LST) :-not(nth1(_, LST, ELEM)), MATCH = ELEM.
-findMatch(ELEM, MATCH, LST) :- length(LST, LEN), nth1(INDEX, LST, ELEM), INDEX < LEN, nextto(ELEM, MATCH, LST).
-findMatch(ELEM, MATCH, [MATCH|T]) :- length([MATCH|T], LEN), nth1(INDEX, [MATCH|T], ELEM), INDEX = LEN.
+findMatch(ELEM, MATCH, LST) :-not(nth1(_, LST, ELEM)), MATCH = ELEM, !.
+findMatch(ELEM, MATCH, LST) :- length(LST, LEN), nth1(INDEX, LST, ELEM), INDEX < LEN, nextto(ELEM, MATCH, LST), !.
+findMatch(ELEM, MATCH, [MATCH|T]) :- length([MATCH|T], LEN), nth1(INDEX, [MATCH|T], ELEM), INDEX = LEN, !.
 
 %replace([_|T], 0, X, [X|T]).
 %replace([H|T], I, X, [H|R]):- I > -1, NI is I-1, replace(T, NI, X, R), !.
@@ -98,5 +100,11 @@ picks(_, 0, [[]]).
 picks(S, N, R) :- N > 0, N1 is N - 1, picks(S, N1, R1), addFront2(S, R1, R).
 
 find(Perms, Target, Pick, N) :- picks(Perms, N, Picks), member(Pick, Picks), cycles(Pick, Target).
+
+convertPtoS([], []).
+convertPtoS([H|T], [H1|T1]) :- rotation(_, H, H1), convertPtoS(T, T1).
+
+convertStoName([], []).
+convertStoName([H|T], [H1|T1]) :- rotation(TMP, _, H), H1 = TMP, convertStoName(T, T1).
 
 %findall(X, rotation(_, _, X), VertexRotations), find(VertexRotations, [], S,  3).
