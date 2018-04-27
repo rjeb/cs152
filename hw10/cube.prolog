@@ -1,5 +1,16 @@
-cycles([], []).
-cycles([H|T], X) :- cycleCreate(0, 0, [H|T], TMP), sort(0, @<, TMP, X).
+%cycles([], [[]]).
+%cycles([H|T], X) :- not(cycles0([H|T], X)), X = [[]].
+%cycles([H|T], X) :- cycles0([H|T], X).
+
+cycles([H|T], X) :- cycleCreate(0, 0, [H|T], TMP), sort(0, @<, TMP, TMP2), removeCycles(TMP2, X).
+
+removeCycles([H|T], X) :- removeCycles1([H|T], TMP), X = TMP.
+
+removeCycles1([], []).
+removeCycles1([H|T], X) :- checkCycle(H), removeCycles1(T, TMP), X = TMP. 
+removeCycles1([H|T], X) :- not(checkCycle(H)), removeCycles1(T, TMPLST), append(H, TMPLST, X). 
+
+checkCycle([H|T]) :- delete([H|T], H, TMPLST), TMPLST = [].
 
 %Test Case: cycles([[0,3,5],[0,6,3],[0,5,3],[0,3,6]], X).
 
@@ -13,9 +24,16 @@ cycleCreate(INDEXNUM, INDEXLST, [H|T], X) :- nth0(INDEXLST, [H|T], CYCLEIN), nth
 normalize([H|T], [H|T]) :- min_member(H, [H|T]).
 normalize([H|T], ANSW) :- not(min_member(H, [H|T])), last([H|T], LAST), delete([H|T], LAST, LST), append([LAST], LST, LST1), normalize(LST1, ANSW).
 
+findcycle(ELEM, [H|T], X) :-findcycle1(ELEM, ELEM, [H|T], X).
+
+findcycle1(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], SEARCH), X = [[]].
+findcycle1(SEARCH, ELEM, [H|T], X) :- not(findFinal(ELEM, [H|T], SEARCH)), findFinal(ELEM, [H|T], TMP), findcycle1(SEARCH,TMP,[H|T],TMP2), append(TMP, TMP2, X).
+
+
 cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [H|T], ELEM)), cycles2(ELEM, MATCH, [H|T], MATCH1), append([ELEM], MATCH1, X).
 %simple cycles of length 2
 cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), compare(<, ELEM, MATCH), X = [ELEM, MATCH].
+cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), compare(=, ELEM, MATCH), X = [ELEM, MATCH].
 cycles1(ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), findFinal(MATCH, [H|T], ELEM), compare(>, ELEM, MATCH), X = [MATCH, ELEM].
 
 cycles2(SEARCH, ELEM, [H|T], X) :- findFinal(ELEM, [H|T], MATCH), not(findFinal(MATCH, [H|T], SEARCH)), cycles2(SEARCH, MATCH, [H|T], MATCH1), append([ELEM], MATCH1, X).
