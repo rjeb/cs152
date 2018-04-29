@@ -1,0 +1,63 @@
+ RUBRIC
+last (max. 2 points):
+notlast (max. 2 points):
+subseq (max. 3 points, -1 if duplicates):
+subset (max. 3 points, -1 if duplicates):
+without (max. 3 points):
+permutation (max. 3 points, -1 if duplicates):
+numbernim (max. 4 points):  
+
+
+ Your Test Run Result:
+last:
+false.
+
+
+notlast:
+X = [],
+Y = [a, b, c] 
+
+subseq:
+
+true.
+
+S = [[],[a],[a,b],[a,b,c],[a,b,c,d],[a,b,c,d,e],[a,b,c,d,e,f],[b],[b,c],[b,c,d],[b,c,d,e],[b,c,d,e,f],[c],[c,d],[c,d,e],[c,d,e,f],[d],[d,e],[d,e,f],[e],[e,f],[f]],
+N = 22.
+
+
+sublist:
+
+true.
+
+S = [[],[a],[a,b],[a,b,c],[a,b,c,d],[a,b,c,d,e],[a,b,c,d,e,f],[a,b,c,d,f],[a,b,c,e],[a,b,c,e,f],[a,b,c,f],[a,b,d],[a,b,d,e],[a,b,d,e,f],[a,b,d,f],[a,b,e],[a,b,e,f],[a,b,f],[a,c],[a,c,d],[a,c,d,e],[a,c,d,e,f],[a,c,d,f],[a,c,e],[a,c,e,f],[a,c,f],[a,d],[a,d,e],[a,d,e,f],[a,d,f],[a,e],[a,e,f],[a,f],[b],[b,c],[b,c,d],[b,c,d,e],[b,c,d,e,f],[b,c,d,f],[b,c,e],[b,c,e,f],[b,c,f],[b,d],[b,d,e],[b,d,e,f],[b,d,f],[b,e],[b,e,f],[b,f],[c],[c,d],[c,d,e],[c,d,e,f],[c,d,f],[c,e],[c,e,f],[c,f],[d],[d,e],[d,e,f],[d,f],[e],[e,f],[f]],
+N = 64.
+
+
+without:
+
+true.
+
+S = [[a,[b,c,d,e]],[b,[a,c,d,e]],[c,[a,b,d,e]],[d,[a,b,c,e]],[e,[a,b,c,d]]].
+
+S = [[f,a,b,c,d,e],[a,f,b,c,d,e],[a,b,f,c,d,e],[a,b,c,f,d,e],[a,b,c,d,f,e],[a,b,c,d,e,f]].
+
+
+permutation:
+
+true.
+
+S = [[a,b,c,d,e],[b,a,c,d,e],[b,c,a,d,e],[b,c,d,a,e],[b,c,d,e,a],[a,c,b,d,e],[c,a,b,d,e],[c,b,a,d,e],[c,b,d,a,e],[c,b,d,e,a],[a,c,d,b,e],[c,a,d,b,e],[c,d,a,b,e],[c,d,b,a,e],[c,d,b,e,a],[a,c,d,e,b],[c,a,d,e,b],[c,d,a,e,b],[c,d,e,a,b],[c,d,e,b,a],[a,b,d,c,e],[b,a,d,c,e],[b,d,a,c,e],[b,d,c,a,e],[b,d,c,e,a],[a,d,b,c,e],[d,a,b,c,e],[d,b,a,c,e],[d,b,c,a,e],[d,b,c,e,a],[a,d,c,b,e],[d,a,c,b,e],[d,c,a,b,e],[d,c,b,a,e],[d,c,b,e,a],[a,d,c,e,b],[d,a,c,e,b],[d,c,a,e,b],[d,c,e,a,b],[d,c,e,b,a],[a,b,d,e,c],[b,a,d,e,c],[b,d,a,e,c],[b,d,e,a,c],[b,d,e,c,a],[a,d,b,e,c],[d,a,b,e,c],[d,b,a,e,c],[d,b,e,a,c],[d,b,e,c,a],[a,d,e,b,c],[d,a,e,b,c],[d,e,a,b,c],[d,e,b,a,c],[d,e,b,c,a],[a,d,e,c,b],[d,a,e,c,b],[d,e,a,c,b],[d,e,c,a,b],[d,e,c,b,a],[a,b,c,e,d],[b,a,c,e,d],[b,c,a,e,d],[b,c,e,a,d],[b,c,e,d,a],[a,c,b,e,d],[c,a,b,e,d],[c,b,a,e,d],[c,b,e,a,d],[c,b,e,d,a],[a,c,e,b,d],[c,a,e,b,d],[c,e,a,b,d],[c,e,b,a,d],[c,e,b,d,a],[a,c,e,d,b],[c,a,e,d,b],[c,e,a,d,b],[c,e,d,a,b],[c,e,d,b,a],[a,b,e,c,d],[b,a,e,c,d],[b,e,a,c,d],[b,e,c,a,d],[b,e,c,d,a],[a,e,b,c,d],[e,a,b,c,d],[e,b,a,c,d],[e,b,c,a,d],[e,b,c,d,a],[a,e,c,b,d],[e,a,c,b,d],[e,c,a,b,d],[e,c,b,a,d],[e,c,b,d,a],[a,e,c,d,b],[e,a,c,d,b],[e,c,a,d,b],[e,c,d,a,b],[e,c,d,b,a],[a,b,e,d,c],[b,a,e,d,c],[b,e,a,d,c],[b,e,d,a,c],[b,e,d,c,a],[a,e,b,d,c],[e,a,b,d,c],[e,b,a,d,c],[e,b,d,a,c],[e,b,d,c,a],[a,e,d,b,c],[e,a,d,b,c],[e,d,a,b,c],[e,d,b,a,c],[e,d,b,c,a],[a,e,d,c,b],[e,a,d,c,b],[e,d,a,c,b],[e,d,c,a,b],[e,d,c,b,a]],
+N = 120.
+
+
+
+true.
+
+S = [[[],[a,b,c,d,e]],[[a,b,c,d,e],[]],[[b,c,d,e],[a]],[[c,d,e],[a,b]],[[d,e],[a,b,c]],[[e],[a,b,c,d]],[[a,c,d,e],[b]],[[a,d,e],[b,c]],[[a,e],[b,c,d]],[[a],[b,c,d,e]],[[b,d,e],[a,c]],[[a,b,d,e],[c]],[[b,e],[a,c,d]],[[a,b,e],[c,d]],[[b],[a,c,d,e]],[[a,b],[c,d,e]],[[c,e],[a,b,d]],[[a,c,e],[b,d]],[[b,c,e],[a,d]],[[a,b,c,e],[d]],[[c],[a,b,d,e]],[[a,c],[b,d,e]],[[b,c],[a,d,e]],[[a,b,c],[d,e]],[[d],[a,b,c,e]],[[a,d],[b,c,e]],[[b,d],[a,c,e]],[[a,b,d],[c,e]],[[c,d],[a,b,e]],[[a,c,d],[b,e]],[[b,c,d],[a,e]],[[a,b,c,d],[e]]],
+N = 32.
+
+
+numbernim:
+
+
+Total Points : 16
