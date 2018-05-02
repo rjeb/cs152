@@ -20,10 +20,6 @@ val mg = new MethodGen(ACC_STATIC | ACC_PUBLIC, // access flags
   "main", "HelloBCEL", // method, class
   il, cp) 
 
-il.append(InstructionFactory.createReturn(Type.VOID))
-mg.setMaxStack()
-cg.addMethod(mg.getMethod())
-il.dispose() // Allow instruction handles to be reused
 
 il.append(factory.createFieldAccess("java.lang.System", "out", 
   new ObjectType("java.io.PrintStream"),
@@ -32,6 +28,12 @@ il.append(factory.createFieldAccess("java.lang.System", "out",
 il.append(factory.createConstant("Hello, World!"))
 
 il.append(factory.createInvoke("java.io.PrintStream", "println",
-  Type.VOID, Array(Type.INT), // return type, param types
+  Type.VOID, Array(Type.STRING), // return type, param types
   Constants.INVOKEVIRTUAL))
+  
+il.append(InstructionFactory.createReturn(Type.VOID))
+mg.setMaxStack()
+cg.addMethod(mg.getMethod())
+il.dispose() // Allow instruction handles to be reused
+
 }

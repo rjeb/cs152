@@ -1,0 +1,22 @@
+Lab bcell
+5/2
+Jason Thai: 010954385 & Vincent Diep: 007329959
+
+Step 1. Done
+
+7. Children contain Scala Library Container, JRE System Library, and 
+bcel-6.2 with bcel-6.2.jar as a child.
+
+Step 2.
+
+4. bcellab
+
+5. Expecting an integer on the stack
+
+6. changed prinln to accept Type.STRING instead of Type.INT
+
+Step 3.
+
+
+
+
