@@ -26,3 +26,12 @@ fac(n) {
 	else r = n * fac(n-1);
 	return r;
 }
+
+Step 3. 
+1.
+Else can belong to first or second if.
+
+2. In scala, else is matched with the 2nd if(closest).
+
+3. In sl3, else belongs to the 2nd if as well.
+
