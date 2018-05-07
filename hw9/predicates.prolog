@@ -1,5 +1,5 @@
 last(E, [_|T]) :- last(E, T).
-last(E, [H]) :- E == H.
+last(E, [H]) :- E = H.
 last(_, []) :- false.
 
 notlast([], [_]).

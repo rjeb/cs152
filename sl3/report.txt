@@ -1,0 +1,28 @@
+Final Lab
+CS 149
+Jason Thai 010954385
+
+Step 1.
+
+3.
+Program(List(Fundef(main,List(),List(),List(Funcall(print,List(Funcall(fac,List(Number(3)))))),Number(0)), Fundef(fac,List(n),List(f, i),List(Assign(f,Number(1)), Assign(i,Number(1)), WhileStat(BoolOp(Variable(i),Variable(n),<=),Block(List(Assign(f,Operator(Variable(f),Variable(i),*)), Assign(i,Operator(Variable(i),Number(1),+)))))),Variable(f))))
+
+
+4. In the base directory sl3.
+
+
+5. Returns 6.
+
+Step 2. 
+
+main() {
+  print(fac(3));
+  return 0;
+}
+
+fac(n) {
+	var r;
+	if (n <= 1) r = 1;
+	else r = n * fac(n-1);
+	return r;
+}
