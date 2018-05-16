@@ -1,15 +1,66 @@
+Jason Thai
+CS 152 Final
+
 a. What objects does the parser yield for aapply and apow?
+Here are the following objects the parser yielded for aapply and apow:
 
+aapply is a Valdef as seen here: 
+Valdef(aapply,Function(List(f),Block(List(),Funcall(Variable(f),List(Variable
+(a))))))
 
+apow is a DefDef as seen here:
+Defdef(apow,Function
+(List(x),Block(List(),IfExpr(Variable(x),Block(List(),Operator(Variable
+(a),Funcall(Variable(apow),List(Operator(Variable(x),Number(1),SL1Parser$$Lambda
+$99/1066376662@1963006a))),SL1Parser$$Lambda$100/183264084@7fbe847c)),Block(List
+(),Number(1))))))
 
 b. What objects are produced when these objects from the parse tree are evaluated? Describe their contents exactly.
+
+When aapply is evaluated it evaluates the expr inside aapply and appends a mapping of its name and the result to the symbol table
+to return. This is seen in the following code:
+
+case Valdef(name, Function(params, body)) => { (name, Closure(params, body, symbols)) :: 
+symbols } case Valdef(name, expr) => { (name, eval(expr, symbols)) :: symbols }      
+
+In this case, it takes the apow function and applies it to an outer variable 'a' which is defined as 3.
+The answer (27) is bound to its name and appended on to the symbol table and returned.
+
+When apow is evaluated it maps its name to a clojure it creates and also returns a List of[(String, Any)] which corresponds to
+the symbol table as seen on the following code: 
+
+case Defdef(name, Function(params, body)) => {
+        val cl = Closure(params, body, symbols)
+        val syms = (name, cl) :: symbols
+        cl.env = syms
+        syms
+}
 
 
 
 c. Where did the mutation happen?
-
+The mutation happens on this line: cl.env = syms. 
+Line 115. 
 
 
 d. Why was it necessary?
+Mutation here is neccesary because the clojure depends on the variables defined in the symboltable when it is created but it also adds
+a new element to the symbol table. Therefore, you create the clojure with the existing symbol table, add it to the symbol table, and you have
+to update it's symbol table to take into account the element you just added (itself). This allows it to reference itself WHICH IS WHY
+IT IS NECESSARY FOR RECURSION
 
+
+
+
+
+
+
+Here is the entire object the parser yielded:
+
+[5.1] parsed: Block(List(Valdef(a,Number(3)), Valdef(aapply,Function(List
+(f),Block(List(),Funcall(Variable(f),List(Variable(a)))))), Defdef(apow,Function
+(List(x),Block(List(),IfExpr(Variable(x),Block(List(),Operator(Variable
+(a),Funcall(Variable(apow),List(Operator(Variable(x),Number(1),SL1Parser$$Lambda
+$99/1066376662@1963006a))),SL1Parser$$Lambda$100/183264084@7fbe847c)),Block(List
+(),Number(1))))))),Funcall(Variable(aapply),List(Variable(apow))))
 
