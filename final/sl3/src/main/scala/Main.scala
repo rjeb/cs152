@@ -14,6 +14,8 @@ case class Operator(left : Expr, right : Expr,
                     op : String) extends Expr
 case class Funcall(fun : String, args : List[Expr]) extends Expr
 
+case class Input1(prompt : String) extends Expr
+
 case class Fundef(name : String, params : List[String], defs : List[String], stats : List[Statement], result : Expr)
 
 case class Block(stats : List[Statement])
@@ -26,6 +28,7 @@ case class IfStat(cond : BoolOp, thenBlock : Block, elseBlock : Option[Block]) e
 case class WhileStat(cond : BoolOp, block : Block) extends Statement
 
 case class Program(funs : List[Fundef])
+
 
 class SL3Parser extends JavaTokenParsers {
   def program: Parser[Program] = rep(fundef) ^^ { Program(_) }
@@ -49,7 +52,11 @@ class SL3Parser extends JavaTokenParsers {
     
   def whilestat: Parser[Statement] = "while" ~> ("(" ~> cond <~ ")") ~ block ^^ { case cond ~ body => WhileStat(cond, body) }
  
-  def expr: Parser[Expr] = (term ~ rep(("+" | "-") ~ term)) ^^ { 
+  def expr: Parser[Expr] = (expr1 | input) ^^ {
+    case a => a
+  }
+  
+  def expr1: Parser[Expr] = (term ~ rep(("+" | "-") ~ term)) ^^ { 
     case a ~ lst => (a /: lst) { 
       case (x, op ~ y) => Operator(x, y, op)
     }
@@ -71,6 +78,10 @@ class SL3Parser extends JavaTokenParsers {
   
   def cond: Parser[BoolOp] = expr ~ ("==" | "!=" | "<=" | "<" | ">=" | ">") ~ expr ^^ { 
     case x ~ op ~ y => BoolOp(x, y, op)}
+  
+  def input: Parser[Input1] = "?" ~> stringLiteral ^^ {
+    case a => Input1(a)
+  }
 }	
   
 object Main extends App {
@@ -256,6 +267,7 @@ object Main extends App {
   val result = parser.parse(parser.program,
     if (args.size == 0) new InputStreamReader(System.in) else
       new FileReader(args(0)))
+  println(result)
   println(result.get)
   codegen(result.get, if (args.size == 0) "Main" else args(0).replaceAll(".sl4", ""))
 }
