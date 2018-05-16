@@ -1,0 +1,15 @@
+a. What objects does the parser yield for aapply and apow?
+
+
+
+b. What objects are produced when these objects from the parse tree are evaluated? Describe their contents exactly.
+
+
+
+c. Where did the mutation happen?
+
+
+
+d. Why was it necessary?
+
+

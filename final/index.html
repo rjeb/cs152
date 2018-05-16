@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='content-type'/> 
+    <title>Green Sheet</title> 
+    <link href='styles.css' rel='stylesheet' type='text/css'/> 
+  </head>
+  <body><h1>San Jose State University | CS 152 Section 4 | Spring 2018</h1>
+    <h2>Final Exam</h2>
+    <h3>Exam Rules</h3>
+    <ul><li>You may put any files that you like on your laptop, including the slides, the Scala/Racket/Prolog/BCEL API, and your and my homework and lab solutions.</li>
+      <li>You may NOT use the Internet for anything during the exam other than accessing your Git repo. </li>
+      <li>You may NOT communicate with anyone other than the exam proctor.</li>
+      <li>Immediately before the exam, run <code>git pull</code> to get the starter file into your repo.</li>
+      <li>Do all your exam work in the folder called <code>final</code> in your repo.</li>
+      <li>Put all your work into the provided starter files in the <code>final</code> directory.</li>
+      <li>You <b>must</b> run git commit every 10 minutes.</li>
+      <li>When the exam is over, run git push to push your repo.</li>
+      <li>The exam is 2 hours and 5 minutes long.</li>
+    </ul>
+    <h3>Exam Problems</h3>
+
+    <ol><li>(10 points) <p>The inverse of a permutation cycle is computed by going from the first element of the cycle to the last element, then going backwards until the second element. For example, the inverse of (1 2 4 3) is (1 3 4 2). We leave the first element in place because it is the smallest one if the cycle has been normalized.</p> <p>The inverse of a permutation that is made up of cycles is obtained by inverting each cycle. For example, the inverse of (1 2 4 3)(5 7 6)(8 9) is (1 3 4 2)(5 6 7)(8 9).</p>
+        <p>Implement a Racket function <code>inverseCycle</code> that takes a cycle, as a list of length ≥ 2, and produces the inverse. You must use <code>foldl</code> or <code>foldr</code> in your solution. Then implement a Racket function <code>inverse</code> that inverts a list of cycles. You must use <code>map</code> in your solution. Do not use other library functions except for <code>first</code>, <code>rest</code>, <code>cons</code>. No recursion. </p>
+        <p>In Racket's fold and map function, the function argument comes before the seed/list. And the function argument order is “newElement partialResult” (the opposite from Scala):</p>
+        <pre>(foldl (lambda (newElement partialResult) (+ newElement (* 10 partialResult))) 0 '(1 2 3 4))
+(foldr cons '() '(1 2 3 4))
+(map (lambda (number) (+ 1 number)) (1 2 3 4))</pre>
+        <p>Complete the file <code>problem1.rkt</code>.</p>
+      </li>
+      <li>(10 points)  Repeat the preceding assignment in Prolog. You may choose any implementation strategy, and use any library functions. Complete the file <code>problem2.prolog</code>.</li>
+      <li>(10 points) In the last lecture I said that we needed mutability to implement recursion in SL1. Explain why, considering the program
+        <pre>val a = 3;
+val aapply = { f =&gt; f(a) };
+def apow = { x =&gt; if (x) a * apow(x - 1) else 1 };
+aapply(apow)</pre>
+
+        <ul><li>What objects does the parser yield for <code>aapply</code> and <code>apow</code>?</li>
+          <li>What objects are produced when these objects from the parse tree are evaluated? Describe their contents exactly.</li>
+          <li>Where did the mutation happen?</li>
+          <li>Why was it necessary?</li>
+        </ul>
+        <p>Put in your description in plain text (Mac TextEdit users—not RTF!) into <code>problem3.txt</code>. Feel free to hand in paper with sketches of the data structures.</p>
+      </li>
+      <li>(10 points) In the <code>problem4</code> project, implement a Scala class <code>Table[K,V]</code> that maps keys of type <code>K</code> to values of type <code>V</code>. Simply use a list of pairs, like we did with the symbol tables in SL1. Provide methods
+        <pre>get(k)
+put(k, v)
+</pre> The <code>get</code> method yields an <code>Option</code> with the value for the given key, or <code>None</code> if there is none. The <code>put</code> method yields a new table of the appropriate type that contains the entries of the current table and the new entry. Provide the appropriate variances for the types <code>K</code> and <code>V</code>, and do whatever else you need to do so that the test cases in <code>TableTest</code> pass.</li>
+      <li>(15 points) In the <code>sl3</code> project, enhance the SL3 program so that it can take input. Provide an expression <code>? "prompt"</code> that displays the prompt string and reads an integer from the console. For example,
+        <pre>main() {
+  var a;
+  var b;
+  a = ? "Enter a: ";
+  print((a + ? "Enter b: ") / 2);
+  return 0;
+}
+</pre> The <code>? "prompt"</code> expression should have the same precedence as function call. Some hints:
+        <ul><li><code>JavaTokenParsers.stringLiteral</code> parses a string literal</li>
+          <li>Define a case class <code>Input</code> that holds the prompt</li>
+          <li>Have the parser produce an <code>Input</code> object. Do this even if you don't know how to do the subsequent parts—you will get partial credit if the parse tree printout shows a correctly parsed expression.</li>
+          <li>Generate code equivalent to the following:
+            <pre>System.out.print(prompt);
+Integer.parseInt(System.console().readLine()); // leaves the input on the stack
+</pre></li>
+          <li>A test program is provided for your convenience. You can run
+            <pre>cd sl3
+sbt run &lt; test.sl3
+java Main
+</pre></li>
+          <li>If you try this and get verification errors, <em>carefully</em> look at all your <code>createInvoke</code> instructions. Check the method class and name, return types, parameter types, and whether the call should be static or virtual. But if you have something else to do, do that first. </li>
+        </ul>
+      </li>
+    </ol>    
+  </body>
+</html>
