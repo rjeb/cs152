@@ -1,4 +1,5 @@
-
+//commented out to get SL1 to compile, uncomment when needed
+/*
 import java.io._
 import scala.util.parsing.combinator._
 
@@ -214,3 +215,4 @@ object Main {
     println("}");
   }
 }
+*/
