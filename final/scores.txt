@@ -1,0 +1,33 @@
+1.
+
+inverseCycle with fold (max. 5 points):5
+inverse with map (max. 5 points): 5
+
+2.
+
+inverseCycle (max. 5 points):5
+inverse (max. 5 points): 5
+
+3.
+
+What objects does the parser yield for aapply and apow? (max. 3 points): 3
+What objects are produced when these objects are evaluated? (max. 3 point): 3
+Where did the mutation happen? (max. 2 points): 2
+Why was it necessary? (max. 2 points): 2
+
+4.
+
+Type variance (max. 3 points):3
+Get method (max. 3 points):0
+Put method (max. 4 points):0
+
+5.
+
+Parses ? stringLiteral to Input(prompt) (max. 3 points):3
+Correct precedence (max. 2 points):0
+Generates System.out, PrintStream.print (max. 2 points):0
+Generates Console.in, readLine, parseInt (max. 2 points):0 
+INVOKEVIRTUAL, INVOKESTATIC 2x (max. 2 points): 0
+VOID, Console, STRING, INT return types (max. 2 points): 0
+(STRING), (), (), (STRING) param types (max. 2 points): 0
+
