@@ -1,0 +1,16 @@
+Below you will find your letter grades for:
+
+* the midterm (15%)
+* the homework (35%)
+* the labs (2.5%)
+* Piazza (2.5%)
+* the project (15%)
+* the final (30%)
+* your final course grade
+
+Your final course grade was obtained by weighing the letter grades by
+the given percentages and rounding to the nearest letter grade.
+
+
+
+A A- A+ C A- B+ A-
